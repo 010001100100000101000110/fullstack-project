@@ -7,7 +7,7 @@ const dbFunctions = {
     async initialize() {
         try {
             await new Promise((resolve, reject) => {
-                db.run('CREATE TABLE IF NOT EXISTS locations (id INTEGER PRIMARY KEY, latitude DECIMAL(9,6), longitude DECIMAL(9,6))', (err) => {
+                db.run('CREATE TABLE IF NOT EXISTS Wordpairs (id INTEGER PRIMARY KEY, english TEXT, finnish TEXT)', (err) => {
                     if (err) {
                         reject(err);
                     } else {
@@ -15,22 +15,36 @@ const dbFunctions = {
                     }
                 });
             })
+
+            const rowCount = await new Promise((resolve, reject) => {
+                db.get('SELECT COUNT(*) as count FROM Wordpairs', [], (err, row) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(row.count);
+                    }
+                });
+            });
             // Create a table
-            await this.insert(27, 8);
-            await this.insert(98, 23);
-            await this.insert(5, 79);
-            await this.insert(18, 12);
-            await this.insert(46, 6);
+            console.log("ROWCOUNT", rowCount);
+            if (rowCount === 0) {
+                // await this.insert("red", "punainen");
+                // await this.insert("yellow", "keltainen");
+                await this.insert("black", "musta");
+                await this.insert("cat", "kissa");
+                // await this.insert("mouse", "hiiri");
+            }
+
         } catch (err) {
             console.err("ERROR WITH INITIALIZING: ", err);
         }
     },
 
-    async insert(lat, lon) {
+    async insert(engWord, finWord) {
         return new Promise(async (resolve, reject) => {
             // Insert data
-            db.run(`INSERT INTO Locations(latitude, longitude) VALUES (?, ?)`,
-                [lat, lon], (err) => {
+            db.run(`INSERT INTO Wordpairs(english, finnish) VALUES (?, ?)`,
+                [engWord, finWord], (err) => {
                     if (err) {
                         reject(err);
                     } else {
@@ -41,16 +55,58 @@ const dbFunctions = {
         });
     },
 
-    async getLocations() {
+    async findById(id) {
+        console.info(`finding by id...${id}`);
+        return new Promise((resolve, reject) => {
+            db.get(`SELECT * FROM Wordpairs WHERE id = ?`, [id], (err, row) => {
+                if (err) {
+                    console.error("Query failed: ", err);
+                    reject(err);
+                    return;
+                }
+                resolve(row);
+            });
+        });
+    },
+
+    async updateWordpair(id, data) {
+        console.info(`updating by id...${id}`);
+        return new Promise((resolve, reject) => {
+            const query = `UPDATE Wordpairs SET english = ?, finnish = ? WHERE id = ?`;
+            db.run(query, [data.english, data.finnish, data.id], (err, rows) => {
+                if (err) {
+                    console.error("failed to update", err);
+                    reject(err);
+                    return;
+                }
+                console.info(`Wordpair updated`);
+                resolve(rows);
+            })
+        })
+    },
+
+    async getWordpairs() {
+        console.info(`getting all...`);
         return new Promise(async (resolve, reject) => {
             // Query data
-            db.all('SELECT * FROM locations', [], (err, rows) => {
+            db.all('SELECT * FROM Wordpairs', [], (err, rows) => {
                 if (err) {
                     reject(err);
                 }
                 resolve(rows);
             });
         })
+    },
+
+    async deleteById(id) {
+        return new Promise((resolve, reject) => {
+            db.run(`DELETE FROM Wordpairs WHERE id = ?`, [id], (err, row) => {
+                if (err) {
+                    reject(err);
+                }
+                resolve(row);
+            });
+        });
     },
 
     close() {

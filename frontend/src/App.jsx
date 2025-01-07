@@ -1,32 +1,33 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import "./App.css";
+import "./css/App.css";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+import NavBar from "./NavBar";
+import FrontPage from "./FrontPage";
+import AdminLoginPage from "./AdminLoginPage";
+import AdminPage from "./AdminPage";
+import AdminAddWordsPage from "./AdminAddWordsPage";
+import AdminEditWordsPage from "./AdminEditWordsPage";
+import StudentMainPage from "./StudentMainPage";
+import StudentPlayAllWords from "./StudentPlayAllWords";
 
 function App() {
-  const [items, setItems] = useState([]);
-  useEffect (() => {
-    const fetchItems = async () => {
-      const apiUrl = '/api/locations';
-
-      try {
-        const response = await axios.get(apiUrl);
-        console.info(response.data);
-        setItems(response.data);
-      } catch (error) {
-        console.error("Error fetching data: ", error);
-      }
-    };
-    fetchItems();
-  }, []);
-
   return (
     <div className="App">
-      <h1>Backed Data</h1>
-      <ul>
-        {items.map((location) => (
-          <li key={location.id}> latitude: {location.latitude}, longitude: {location.longitude}</li>
-        ))}
-      </ul>
+
+      <BrowserRouter>
+        {NavBar()}
+        <div>
+          <Routes>
+            <Route path="/" element={<FrontPage />} />
+            <Route path="/login" element={<AdminLoginPage />} />
+            <Route path="/admin" element={<AdminPage />} />
+            <Route path="/admin/add-words" element={<AdminAddWordsPage />} />
+            <Route path="/admin/edit-words/:id" element={<AdminEditWordsPage />} />
+            <Route path="/student" element={<StudentMainPage />} />
+            <Route path="/student/play-all" element={<StudentPlayAllWords />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
     </div>
   );
 }

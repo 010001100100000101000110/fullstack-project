@@ -1,0 +1,13 @@
+.wordpair {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.english-word {
+    background-color: rgb(255, 128, 128);
+}
+
+.finnish-word {
+    background-color: rgb(115, 187, 235);
+}

@@ -1,0 +1,10 @@
+.wordtable {
+    display: grid;
+    background-color: aqua;
+    padding: 5px;
+}
+
+.wordtable li {
+    background-color: yellowgreen;
+    margin: 5px;
+}
