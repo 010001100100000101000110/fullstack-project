@@ -28,11 +28,11 @@ const dbFunctions = {
             // Create a table
             console.log("ROWCOUNT", rowCount);
             if (rowCount === 0) {
-                // await this.insert("red", "punainen");
-                // await this.insert("yellow", "keltainen");
+                await this.insert("red", "punainen");
+                await this.insert("yellow", "keltainen");
                 await this.insert("black", "musta");
                 await this.insert("cat", "kissa");
-                // await this.insert("mouse", "hiiri");
+                await this.insert("mouse", "hiiri");
             }
 
         } catch (err) {
@@ -73,14 +73,14 @@ const dbFunctions = {
         console.info(`updating by id...${id}`);
         return new Promise((resolve, reject) => {
             const query = `UPDATE Wordpairs SET english = ?, finnish = ? WHERE id = ?`;
-            db.run(query, [data.english, data.finnish, data.id], (err, rows) => {
+            db.run(query, [data.english, data.finnish, id], (err) => {
                 if (err) {
                     console.error("failed to update", err);
                     reject(err);
                     return;
                 }
                 console.info(`Wordpair updated`);
-                resolve(rows);
+                resolve(this.changes);
             })
         })
     },

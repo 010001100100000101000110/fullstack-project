@@ -10,7 +10,8 @@ export default function AdminEditWordsPage() {
     const [wordpair, setWordpair] = useState(null);
     const [englishWord, setEnglishWord] = useState("");
     const [finnishWord, setFinnishWord] = useState("");
-
+    const [showDeleteMessage, setShowDeleteMessage] = useState(false);
+    const [showSaveMessage, setShowSaveMessage] = useState(false);
     useEffect(() => {
         const fetchWordpair = async () => {
             try {
@@ -29,11 +30,16 @@ export default function AdminEditWordsPage() {
         fetchWordpair();
     },[id]);
 
-    const handleClick = async () => {
+    const handleSave = async () => {
         try {
-            const apiUrl = `/api/wordpairs/${id}`;
+            setShowSaveMessage(true);
+            const apiUrl = `http://localhost:3000/api/wordpairs/${id}`;
             const wordpair = { english: englishWord, finnish: finnishWord }
-            await axios.put(apiUrl, wordpair);
+            const response = await axios.put(apiUrl, wordpair);
+            setTimeout(() => {
+                console.log("RESPONSE: ", response);
+                setShowSaveMessage(false);
+            }, 2000);
         } catch (error) {
             console.error("Error inserting data: ", error);
         }
@@ -45,12 +51,19 @@ export default function AdminEditWordsPage() {
 
     const handleDelete = async () => {
         try {
+            setShowDeleteMessage(true);
             const apiUrl = `http://localhost:3000/api/wordpairs/${id}`;
-            await axios.delete(apiUrl);
+            const response = await axios.delete(apiUrl);
+            setTimeout(() => {
+                console.log("RESPONSE: ", response);
+                setShowDeleteMessage(false);
+            }, 2000);
         } catch (error) {
             console.error(error);
         }
     }
+
+
 
     return (
         <div>
@@ -72,7 +85,7 @@ export default function AdminEditWordsPage() {
 
             <button
                 className="save-words-btn"
-                onClick={handleClick}
+                onClick={handleSave}
             >
                 Save
             </button>
@@ -85,6 +98,8 @@ export default function AdminEditWordsPage() {
 
             <button onClick={handleDelete}>delete</button>
 
+            {showDeleteMessage && <p>Wordpair deleted.</p>}
+            {showSaveMessage && <p>Wordpair saved!</p>}
         </div>
     )
 }

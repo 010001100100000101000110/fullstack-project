@@ -11,6 +11,7 @@ export default function WordTable() {
     useEffect(() => {
         console.log("USE EFFECT");
         const fetchItems = async () => {
+            console.log("FETCH");
             const apiUrl = ' http://localhost:3000/api/wordpairs';
             try {
                 const response = await axios.get(apiUrl);

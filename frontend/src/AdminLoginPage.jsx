@@ -16,7 +16,7 @@ export default function AdminLoginPage() {
             setShowMessage(true);
             setTimeout(() => {
                 setShowMessage(false);
-            }, 2000);
+            }, 4000);
         } else {
             window.location.href = "/admin";
         }

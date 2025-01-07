@@ -63,7 +63,9 @@ router.put("/:id", async (req, res) => {
     }
 
     try {
-        const response = await dbFunctions.updateWordpair(id, english, finnish);
+        const wordpair = req.body;
+        console.log("WORDPAIR ", wordpair);
+        const response = await dbFunctions.updateWordpair(id, wordpair);
         if (response === 0) {
             return res.status(404).json({ error: "wordpair not found" });
         }
