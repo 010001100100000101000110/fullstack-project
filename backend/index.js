@@ -5,35 +5,43 @@ const router = express.Router();
 const dbFunctions = require('./database');
 const path = require('path');
 
+//middleware
 app.use(express.json());
-app.use("/api/wordpairs", router);
 app.use(express.static(path.join(__dirname, "public")));
+
+//routes
+app.use("/api/wordpairs", router);
+
+//start server
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+    console.log(`Server running on port ${port}`)
 })
 
+//routes implementation
 router.get("/", async (req, res) => {
     try {
         await dbFunctions.initialize();
         const wordpairs = await dbFunctions.getWordpairs();
-        console.log(wordpairs);
         res.json(wordpairs);
-        dbFunctions.close;
     } catch (err) {
-        console.error("Database error: ", err);
+        console.error("Error fetching wordpairs: ", err);
+        res.status(500).json({ error: "Failed to fetch wordpairs" });
+    } finally {
+        dbFunctions.close();
     }
 });
 
 router.get("/:id", async (req, res) => {
     try {
         const { id } = req.params;
-        console.log("ID!!! ", id);
         const wordpair = await dbFunctions.findById(id);
-        console.log(wordpair);
+        if (!wordpair) {
+            return res.status(404).json({ error: "Wordpair not found" });
+        }
         res.json(wordpair);
     } catch (err) {
-        console.error("Database error: ", err);
-        res.status(500).json({ error: "Database error" });
+        console.error("Error fetching wordpair by ID: ", err);
+        res.status(500).json({ error: "Failed to fetch wordpair by ID" });
     }
 });
 
@@ -41,52 +49,44 @@ router.post("/", async (req, res) => {
     try {
         const { english, finnish } = req.body;
         if (!english || !finnish) {
-            return res.status(400).json();
+            return res.status(400).json({ error: "Both fields are required" });
         }
         await dbFunctions.insert(english, finnish);
-        res.status(201).json();
+        res.status(201).json({ message: "Wordpair created" });
     } catch (err) {
-        console.error("Database error: ", err);
-        res.status(500).json();
+        console.error("Error creating wordpair: ", err);
+        res.status(500).json({ error: "Failed to create wordpair" });
     }
 });
 
 router.put("/:id", async (req, res) => {
-
-    const { id } = req.params;
-    console.log("IN PUT REQ");
-    const { english, finnish } = req.body;
-    console.log(id, english, finnish);
-
-    if (!english || !finnish) {
-        return res.status(400).json();
-    }
-
     try {
+        const { id } = req.params;
         const wordpair = req.body;
-        console.log("WORDPAIR ", wordpair);
+        if (!wordpair.english || !wordpair.finnish) {
+            return res.status(400).json({ error: "Both fields are required" });
+        }
         const response = await dbFunctions.updateWordpair(id, wordpair);
         if (response === 0) {
-            return res.status(404).json({ error: "wordpair not found" });
+            return res.status(404).json({ error: "Wordpair not found" });
         }
         res.json({ message: "Wordpair updated" });
     } catch (err) {
-        console.error("Database error: ", err);
-        res.status(500).json();
+        console.error("Error updating wordpair: ", err);
+        res.status(500).json({ error: "Failed to update wordpair" });
     }
 });
+
 router.delete("/:id", async (req, res) => {
-    console.log("IN DELETE");
-    const { id } = req.params;
-    console.log("IN DELETE", id);
     try {
+        const { id } = req.params;
         const response = await dbFunctions.deleteById(id);
         if (response === 0) {
             return res.status(404).json({ error: "wordpair not found" });
         }
         res.json({ message: "Wordpair deleted" });
     } catch (err) {
-        console.error("Database error: ", err);
-        res.status(500).json();
+        console.error("Error deleting wordpair: ", err);
+        res.status(500).json({ error: "Failed to delete wordpair" });
     }
 })
