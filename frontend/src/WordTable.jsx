@@ -5,6 +5,9 @@ import './css/WordPair.css';
 import Wordpair from './Wordpair';
 import { useState, useEffect } from "react";
 
+//**
+//
+// */
 export default function WordTable() {
     const [wordpairs, setWordpairs] = useState([]);
 

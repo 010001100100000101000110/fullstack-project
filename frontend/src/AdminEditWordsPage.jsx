@@ -1,17 +1,24 @@
 //page which allows the admin to edit wordpairs
 import './css/FrontPage.css';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import axios from "axios";
 
 
+//**
+//
+//
+//
+// */
 export default function AdminEditWordsPage() {
     const { id } = useParams();
     const [wordpair, setWordpair] = useState(null);
     const [englishWord, setEnglishWord] = useState("");
     const [finnishWord, setFinnishWord] = useState("");
-    const [showDeleteMessage, setShowDeleteMessage] = useState(false);
+    const [wordsDeleted, setWordsDeleted] = useState(false);
     const [showSaveMessage, setShowSaveMessage] = useState(false);
+    const navigate = useNavigate();
+
     useEffect(() => {
         const fetchWordpair = async () => {
             try {
@@ -30,8 +37,12 @@ export default function AdminEditWordsPage() {
         fetchWordpair();
     },[id]);
 
+    //**
+    //
+    // */
     const handleSave = async () => {
         try {
+
             setShowSaveMessage(true);
             const apiUrl = `http://localhost:3000/api/wordpairs/${id}`;
             const wordpair = { english: englishWord, finnish: finnishWord }
@@ -39,7 +50,7 @@ export default function AdminEditWordsPage() {
             setTimeout(() => {
                 console.log("RESPONSE: ", response);
                 setShowSaveMessage(false);
-            }, 2000);
+            }, 3000);
         } catch (error) {
             console.error("Error inserting data: ", error);
         }
@@ -49,57 +60,65 @@ export default function AdminEditWordsPage() {
         return <h2>Loading...</h2>
     }
 
+    //**
+    //
+    // */
     const handleDelete = async () => {
         try {
-            setShowDeleteMessage(true);
+            setWordsDeleted(true);
             const apiUrl = `http://localhost:3000/api/wordpairs/${id}`;
             const response = await axios.delete(apiUrl);
             setTimeout(() => {
                 console.log("RESPONSE: ", response);
-                setShowDeleteMessage(false);
+                setWordsDeleted(false);
+                navigate('/admin', { replace: true });
             }, 2000);
         } catch (error) {
             console.error(error);
         }
     }
 
-
-
+    if (wordsDeleted) {
+        return (
+            <p>Wordpair deleted.</p>
+        )
+    }
     return (
         <div>
-            <p>{wordpair.id}</p>
-            <h1>Edit word pair</h1>
+            <div>
+                <p>{wordpair.id}</p>
+                <h1>Edit word pair</h1>
 
-            <input
-                type="text"
-                placeholder="English"
-                defaultValue={wordpair.english}
-                onChange={(event) => setEnglishWord(event.target.value)}
-            />
-            <input
-                type="text"
-                placeholder="Finnish"
-                defaultValue={wordpair.finnish}
-                onChange={(event) => setFinnishWord(event.target.value)}
-            />
+                <input
+                    type="text"
+                    placeholder="English"
+                    defaultValue={wordpair.english}
+                    onChange={(event) => setEnglishWord(event.target.value)}
+                />
+                <input
+                    type="text"
+                    placeholder="Finnish"
+                    defaultValue={wordpair.finnish}
+                    onChange={(event) => setFinnishWord(event.target.value)}
+                />
 
-            <button
-                className="save-words-btn"
-                onClick={handleSave}
-            >
-                Save
-            </button>
-
-            <Link to="/admin">
-                <button id="choose-student-btn">
-                    Go back
+                <button
+                    className="save-words-btn"
+                    onClick={handleSave}
+                >
+                    Save
                 </button>
-            </Link>
 
-            <button onClick={handleDelete}>delete</button>
+                <Link to="/admin">
+                    <button id="choose-student-btn">
+                        Go back
+                    </button>
+                </Link>
 
-            {showDeleteMessage && <p>Wordpair deleted.</p>}
-            {showSaveMessage && <p>Wordpair saved!</p>}
+                <button onClick={handleDelete}>delete</button>
+
+                {showSaveMessage && <p>Wordpair saved!</p>}
+            </div>
         </div>
     )
 }

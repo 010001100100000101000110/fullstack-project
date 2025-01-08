@@ -4,6 +4,11 @@ import './css/FrontPage.css';
 import { Link } from 'react-router-dom';
 import WordTable from './WordTable';
 
+//**
+//
+//
+//
+// */
 export default function AdminPage() {
 
     return (

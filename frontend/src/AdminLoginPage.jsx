@@ -4,6 +4,11 @@
 import { Link } from 'react-router-dom';
 import { useState } from "react";
 
+//**
+//
+//
+//
+// */
 export default function AdminLoginPage() {
 
     const [username, setUsername] = useState("");
@@ -11,6 +16,10 @@ export default function AdminLoginPage() {
 
     const [showMessage, setShowMessage] = useState(false);
 
+    //**
+    //
+    //
+    // */
     const handleLogin = () => {
         if (username !== "admin" || password !== "admin") {
             setShowMessage(true);
@@ -40,11 +49,6 @@ export default function AdminLoginPage() {
             <button id="login-btn" onClick={handleLogin}>
                 Log in
             </button>
-            {/* <Link to="/admin">
-                <button id="login-btn" onClick={handleLogin}>
-                    Log in
-                </button>
-            </Link> */}
 
             {showMessage &&
             <div>

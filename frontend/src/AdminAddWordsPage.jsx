@@ -5,12 +5,21 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 
+//**
+//
+//
+//
+// */
 export default function AdminAddWordsPage() {
 
     const [englishWord, setEnglishWord] = useState("");
     const [finnishWord, setFinnishWord] = useState("");
     const [showMessage, setShowMessage] = useState(false);
 
+    //**
+    //
+    //
+    // */
     const handleClick = async () => {
         setShowMessage(true);
         try {

@@ -3,6 +3,11 @@ import './css/StudentPlayAllWords.css'
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
+
+//**
+//
+//
+// */
 export default function StudentPlayAllWords() {
 
     const [wordpairs, setWordpairs] = useState([]);
@@ -19,6 +24,9 @@ export default function StudentPlayAllWords() {
 
     const [language, setLanguage] = useState("finnish");
 
+    const [score, setScore] = useState(0);
+    const [questionAmount, setQuestionAmount] = useState(0);
+
     const setFinnish = () => {
         setShowQuestion(false);
         setLanguage("finnish");
@@ -33,6 +41,8 @@ export default function StudentPlayAllWords() {
             try {
                 const response = await axios.get(apiUrl);
                 setWordpairs(response.data);
+                console.log("LENGTH ", response.data.length);
+                setQuestionAmount(response.data.length);
                 getRandomPair(response.data);
 
             } catch (error) {
@@ -42,103 +52,57 @@ export default function StudentPlayAllWords() {
         fetchItems();
     }, []);
 
+    //**
+    //
+    //
+    // */
     function getRandomPair(array) {
         if (array.length === 0) return;
-        const randNum = Math.floor(Math.random() * (array.length + 1));
+        const randNum = Math.floor(Math.random() * array.length);
         console.log(randNum);
-        const selectedPair = array[randNum];
-        setCurrentWordpair(selectedPair);
+        setCurrentWordpair(array[randNum]);
         console.log("CURRENT WORDPAIR: ", currentWordpair);
-        setWordpairs((prevWordpairs) =>
-            prevWordpairs.filter((_,index) => index !== randNum)
+        setWordpairs((prev) =>
+            prev.filter((_,index) => index !== randNum)
         );
     }
 
+    //**
+    //
+    //
+    // */
     function handleAnswer() {
-        //write finnish
-        if (language === "finnish") {
-            console.log("KIELI");
-            setShowMessage(true);
-            console.log("CURRENT WORDPAIR: ", currentWordpair);
-            if (answer !== currentWordpair.finnish) {
-                console.log("TÄÄLLÄ", answer, currentWordpair.finnish);
-                setMessage("You suck fr!");
+        if(!currentWordpair) return;
 
-            } else {
-                console.log("OIKEIN MENI");
-                setMessage("Nicely done!");
+        const isCorrect =
+            (language === "finnish" && answer === currentWordpair.finnish) ||
+            (language === "english" && answer === currentWordpair.english);
 
-            }
+        setMessage(isCorrect ? "Nicely done!" : "You suck fr!");
+        setScore((prev) => (isCorrect ? prev + 1 : prev));
+        setAnswers((prev) => [
+            ...prev,
+            {
+                q: language === "finnish" ? currentWordpair.english : currentWordpair.finnish,
+                a: answer,
+                correct: isCorrect ? "Correct!:)" : "Incorrect!:(" }]);
 
-            setAnswers((prevAnswers) => [...prevAnswers, { q: currentWordpair.english, a: answer, correct: answer === currentWordpair.finnish ? "Correct!:)" : "Incorrect!:(" }]);
-            console.log("ANSWERS: ", answers);
-            if (wordpairs.length === 1) {
-                setGamePlayed(true);
-            } else {
-                getRandomPair(wordpairs);
+        if (wordpairs.length === 0) {
+            setGamePlayed(true);
+        } else {
+            getRandomPair(wordpairs);
 
-            }
-            setTimeout(() => {
-                setShowMessage(false);
-            }, 2000);
-            console.log("CURRENT WORDPAIR: ", currentWordpair);
         }
-
-
-        //write english
-        if (language === "english") {
-            console.log("LANGUAGE");
-            setShowMessage(true);
-            console.log("CURRENT WORDPAIR: ", currentWordpair);
-            if (answer !== currentWordpair.english) {
-                console.log("TÄÄLLÄ", answer, currentWordpair.english);
-                setMessage("You suck fr!");
-
-            } else {
-                console.log("OIKEIN MENI");
-                setMessage("Nicely done!");
-
-            }
-
-            setAnswers((prevAnswers) => [...prevAnswers, { q: currentWordpair.finnish, a: answer, correct: answer === currentWordpair.english ? "Correct!:)" : "Incorrect!:(" }]);
-            console.log("ANSWERS: ", answers);
-            if (wordpairs.length === 1) {
-                setGamePlayed(true);
-            } else {
-                getRandomPair(wordpairs);
-
-            }
-            setTimeout(() => {
-                setShowMessage(false);
-            }, 2000);
-            console.log("CURRENT WORDPAIR: ", currentWordpair);
-        }
-
+        setShowMessage(true);
+        setTimeout(() => {
+            setShowMessage(false);
+        }, 2000);
+        console.log("CURRENT WORDPAIR: ", currentWordpair);
     }
 
-    return (
-        <div>
-            {/*write the finnish word */}
-            {!gamePlayed && !showQuestion && language === "finnish" &&
-            <div>
-            <h1>Write the correct word!</h1>
-
-            <p>{currentWordpair && currentWordpair.english}</p>
-            <input
-                type="text"
-                placeholder="in finnish"
-                onChange={(event) => setAnswer(event.target.value)}
-            />
-
-            <button
-            onClick={handleAnswer}>
-                Confirm
-            </button>
-
-            <p>{showMessage && message}</p>
-            </div>}
-
-            {/* {gamePlayed &&
+    //show score after playthrough
+    if (gamePlayed) {
+        return (
             <div>
                 <h1>Your score:</h1>
                 <ul className="scoretable">
@@ -146,37 +110,30 @@ export default function StudentPlayAllWords() {
                         <li key={i}> q: {answer.q} a: {answer.a} {answer.correct}</li>
                     ))}
                 </ul>
-            </div>} */}
+                <p>{score}/{questionAmount}</p>
+            </div>
+        )
+    }
 
-            {/*write the english word */}
-            {!gamePlayed && !showQuestion && language === "english" &&
+    if(!currentWordpair) {
+        return <p>Loading...</p>;
+    }
+
+    return (
+        <div>
+            {!showQuestion &&
                 <div>
                     <h1>Write the correct word!</h1>
-
-                    <p>{currentWordpair && currentWordpair.finnish}</p>
+                    <p>{language === "finnish" ? currentWordpair.english : currentWordpair.finnish}</p>
                     <input
                         type="text"
-                        placeholder="in english"
+                        placeholder={`in ${language}`}
                         onChange={(event) => setAnswer(event.target.value)}
                     />
-
-                    <button
-                        onClick={handleAnswer}>
-                        Confirm
-                    </button>
-
-                    <p>{showMessage && message}</p>
-                </div>}
-
-            {gamePlayed &&
-                <div>
-                    <h1>Your score:</h1>
-                    <ul className="scoretable">
-                        {answers.map((answer, i) => (
-                            <li key={i}> q: {answer.q} a: {answer.a} {answer.correct}</li>
-                        ))}
-                    </ul>
-                </div>}
+                    <button onClick={handleAnswer}>Confirm</button>
+                    {showMessage && <p>{message}</p>}
+                </div>
+            }
 
             {showQuestion &&
                 <div>

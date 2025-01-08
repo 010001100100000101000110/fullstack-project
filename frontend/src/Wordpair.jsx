@@ -3,6 +3,11 @@
 import './css/Wordpair.css';
 import { Link } from 'react-router-dom';
 
+//**
+//
+//
+//
+// */
 export default function Wordpair({pair}) {
 
     const url = `/admin/edit-words/${pair.id}`;
