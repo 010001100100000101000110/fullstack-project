@@ -1,0 +1,56 @@
+#score-page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.scoretable {
+    width: 90%;
+    display: grid;
+    grid-template-columns: 50px 1fr 1fr 100px;
+    align-items: center;
+    border-width: 3px;
+    border-style: solid;
+    border-radius: 40px;
+    background-color: #f2a4c6;
+    align-content: center;
+    text-align: center;
+    padding: 0 50px;
+
+    max-height: 380px;
+    overflow-y: auto;
+}
+
+.header,
+.row {
+    display: contents;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+}
+
+.row p {
+    border-bottom: 1px solid black;
+}
+
+.header p {
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 2px solid black;
+}
+
+.ans-correct {
+    background-color: rgb(60, 255, 0);
+}
+
+.ans-incorrect {
+    background-color: rgb(255, 16, 16)
+}
+
+#final-score {
+    background-color: magenta;
+    border-radius: 60px;
+    color: rgb(255, 255, 255);
+    width: 50px;
+}

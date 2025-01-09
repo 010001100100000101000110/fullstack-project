@@ -1,0 +1,19 @@
+#front-page {
+    width: 100%;
+}
+
+#role-links {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+}
+
+#role-links button {
+    margin: 0 5px;
+    width: 400px;
+    height: 210px;
+    background-color: rgb(255, 211, 251);
+}

@@ -17,11 +17,11 @@ import StudentPlayAllWords from "./StudentPlayAllWords";
 // */
 function App() {
   return (
-    <div className="App">
+    <div className="app">
 
       <BrowserRouter>
         {NavBar()}
-        <div>
+        <div className="contents">
           <Routes>
             <Route path="/" element={<FrontPage />} />
             <Route path="/login" element={<AdminLoginPage />} />
@@ -30,8 +30,6 @@ function App() {
             <Route path="/admin/edit-words/:id" element={<AdminEditWordsPage />} />
             <Route path="/student" element={<StudentMainPage />} />
             <Route path="/student/play-all" element={<StudentPlayAllWords />} />
-            <Route path="/student/play-all/english" element={<StudentPlayAllWords />} />
-            <Route path="/student/play-all/finnish" element={<StudentPlayAllWords />} />
           </Routes>
         </div>
       </BrowserRouter>

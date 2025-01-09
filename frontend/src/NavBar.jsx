@@ -11,7 +11,7 @@ export default function NavBar() {
         <nav className='nav-bar'>
             <Link to="/">
                 <button id="main-page-btn">
-                    Home
+                    Role selection
                 </button>
             </Link>
         </nav>

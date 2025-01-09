@@ -26,8 +26,6 @@ router.get("/", async (req, res) => {
     } catch (err) {
         console.error("Error fetching wordpairs: ", err);
         res.status(500).json({ error: "Failed to fetch wordpairs" });
-    } finally {
-        dbFunctions.close();
     }
 });
 
@@ -47,11 +45,11 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
     try {
-        const { english, finnish } = req.body;
-        if (!english || !finnish) {
+        const { english, finnish, swedish } = req.body;
+        if (!english || !finnish || !swedish) {
             return res.status(400).json({ error: "Both fields are required" });
         }
-        await dbFunctions.insert(english, finnish);
+        await dbFunctions.insert(english, finnish, swedish);
         res.status(201).json({ message: "Wordpair created" });
     } catch (err) {
         console.error("Error creating wordpair: ", err);
@@ -63,7 +61,7 @@ router.put("/:id", async (req, res) => {
     try {
         const { id } = req.params;
         const wordpair = req.body;
-        if (!wordpair.english || !wordpair.finnish) {
+        if (!wordpair.english || !wordpair.finnish || !wordpair.swedish) {
             return res.status(400).json({ error: "Both fields are required" });
         }
         const response = await dbFunctions.updateWordpair(id, wordpair);

@@ -1,5 +1,5 @@
 //page which allows the admin to edit wordpairs
-import './css/FrontPage.css';
+import './css/AdminEditWordsPage.css';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -15,6 +15,7 @@ export default function AdminEditWordsPage() {
     const [wordpair, setWordpair] = useState(null);
     const [englishWord, setEnglishWord] = useState("");
     const [finnishWord, setFinnishWord] = useState("");
+    const [swedishWord, setSwedishWord] = useState("");
     const [wordsDeleted, setWordsDeleted] = useState(false);
     const [showSaveMessage, setShowSaveMessage] = useState(false);
     const navigate = useNavigate();
@@ -27,9 +28,7 @@ export default function AdminEditWordsPage() {
                 setWordpair(response.data);
                 setEnglishWord(response.data.english);
                 setFinnishWord(response.data.finnish);
-                // setEnglishWord(wordpair.english);
-                // setFinnishWord(wordpair.finnish);
-                // console.info(wordpair.data);
+                setSwedishWord(response.data.swedish);
             } catch (error) {
                 console.error("Error getting data: ", error);
             }
@@ -42,10 +41,9 @@ export default function AdminEditWordsPage() {
     // */
     const handleSave = async () => {
         try {
-
             setShowSaveMessage(true);
             const apiUrl = `http://localhost:3000/api/wordpairs/${id}`;
-            const wordpair = { english: englishWord, finnish: finnishWord }
+            const wordpair = { english: englishWord, finnish: finnishWord, swedish: swedishWord }
             const response = await axios.put(apiUrl, wordpair);
             setTimeout(() => {
                 console.log("RESPONSE: ", response);
@@ -101,6 +99,12 @@ export default function AdminEditWordsPage() {
                     defaultValue={wordpair.finnish}
                     onChange={(event) => setFinnishWord(event.target.value)}
                 />
+                <input
+                    type="text"
+                    placeholder="Swedish"
+                    defaultValue={wordpair.swedish}
+                    onChange={(event) => setSwedishWord(event.target.value)}
+                />
 
                 <button
                     className="save-words-btn"
@@ -115,7 +119,7 @@ export default function AdminEditWordsPage() {
                     </button>
                 </Link>
 
-                <button onClick={handleDelete}>delete</button>
+                <button className="delete-btn" onClick={handleDelete}></button>
 
                 {showSaveMessage && <p>Wordpair saved!</p>}
             </div>

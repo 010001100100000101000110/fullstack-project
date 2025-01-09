@@ -1,14 +1,9 @@
-//page which allows the admin to log in and continue in the app
-
-//import './css/AdminLoginPage.css';
-import { Link } from 'react-router-dom';
+import './css/AdminLoginPage.css';
 import { useState } from "react";
 
-//**
-//
-//
-//
-// */
+/**
+ * page which allows the admin to log in and continue in the app
+ */
 export default function AdminLoginPage() {
 
     const [username, setUsername] = useState("");
@@ -16,10 +11,9 @@ export default function AdminLoginPage() {
 
     const [showMessage, setShowMessage] = useState(false);
 
-    //**
-    //
-    //
-    // */
+    /**
+     *
+     */
     const handleLogin = () => {
         if (username !== "admin" || password !== "admin") {
             setShowMessage(true);
@@ -32,15 +26,19 @@ export default function AdminLoginPage() {
     }
 
     return (
-        <div>
-            <h1>Login</h1>
+        <div id="login-container">
+            <h1>Log in</h1>
 
+            <h3>Username:</h3>
             <input
+                id="input-username"
                 type="text"
                 placeholder="username"
                 onChange={(event) => setUsername(event.target.value)}
             />
+            <h3>Password:</h3>
             <input
+                id="input-password"
                 type="password"
                 placeholder="password"
                 onChange={(event) => setPassword(event.target.value)}
@@ -52,7 +50,7 @@ export default function AdminLoginPage() {
 
             {showMessage &&
             <div>
-                <p>wrong login info! correct id is u: admin, p: admin. hope this helps!</p>
+                <p id="login-msg">wrong login info! correct id is u: admin, p: admin. hope this helps!</p>
             </div>
             }
 

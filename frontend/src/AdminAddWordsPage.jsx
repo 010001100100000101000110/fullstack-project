@@ -1,7 +1,7 @@
 //page which allows the admin to add words to database
-import './css/FrontPage.css';
+import './css/AdminAddWordsPage.css';
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 
@@ -14,17 +14,18 @@ export default function AdminAddWordsPage() {
 
     const [englishWord, setEnglishWord] = useState("");
     const [finnishWord, setFinnishWord] = useState("");
+    const [swedishWord, setSwedishWord] = useState("");
     const [showMessage, setShowMessage] = useState(false);
 
     //**
     //
     //
     // */
-    const handleClick = async () => {
+    const handleSave = async () => {
         setShowMessage(true);
         try {
             const apiUrl = 'http://localhost:3000/api/wordpairs';
-            const wordpair = { english: englishWord, finnish: finnishWord }
+            const wordpair = { english: englishWord, finnish: finnishWord , swedish: swedishWord}
 
             const response = await axios.post(apiUrl, wordpair);
             console.info(response.data);
@@ -50,10 +51,15 @@ export default function AdminAddWordsPage() {
                 placeholder="Finnish"
                 onChange={(event) => setFinnishWord(event.target.value)}
             />
+            <input
+                type="text"
+                placeholder="Swedish"
+                onChange={(event) => setSwedishWord(event.target.value)}
+            />
 
             <button
                 id="add-to-database-btn"
-                onClick={handleClick}
+                onClick={handleSave}
             >
                 Add to database
             </button>

@@ -7,7 +7,7 @@ const dbFunctions = {
     async initialize() {
         try {
             await new Promise((resolve, reject) => {
-                db.run('CREATE TABLE IF NOT EXISTS Wordpairs (id INTEGER PRIMARY KEY, english TEXT, finnish TEXT)', (err) => {
+                db.run('CREATE TABLE IF NOT EXISTS Wordpairs (id INTEGER PRIMARY KEY, english TEXT, finnish TEXT, swedish TEXT)', (err) => {
                     if (err) {
                         reject(err);
                     } else {
@@ -28,11 +28,11 @@ const dbFunctions = {
             // Create a table
             console.log("ROWCOUNT", rowCount);
             if (rowCount === 0) {
-                await this.insert("red", "punainen");
-                await this.insert("yellow", "keltainen");
-                await this.insert("black", "musta");
-                await this.insert("cat", "kissa");
-                await this.insert("mouse", "hiiri");
+                await this.insert("red", "punainen", "röd");
+                await this.insert("yellow", "keltainen", "gul");
+                await this.insert("black", "musta", "svart");
+                await this.insert("cat", "kissa", "katt");
+                await this.insert("mouse", "hiiri", "mus");
             }
 
         } catch (err) {
@@ -40,11 +40,11 @@ const dbFunctions = {
         }
     },
 
-    async insert(engWord, finWord) {
+    async insert(engWord, finWord, sweWord) {
         return new Promise(async (resolve, reject) => {
             // Insert data
-            db.run(`INSERT INTO Wordpairs(english, finnish) VALUES (?, ?)`,
-                [engWord, finWord], (err) => {
+            db.run(`INSERT INTO Wordpairs(english, finnish, swedish) VALUES (?, ?, ?)`,
+                [engWord, finWord, sweWord], (err) => {
                     if (err) {
                         reject(err);
                     } else {
@@ -72,8 +72,8 @@ const dbFunctions = {
     async updateWordpair(id, data) {
         console.info(`updating by id...${id}`);
         return new Promise((resolve, reject) => {
-            const query = `UPDATE Wordpairs SET english = ?, finnish = ? WHERE id = ?`;
-            db.run(query, [data.english, data.finnish, id], (err) => {
+            const query = `UPDATE Wordpairs SET english = ?, finnish = ?, swedish = ? WHERE id = ?`;
+            db.run(query, [data.english, data.finnish, data.swedish, id], (err) => {
                 if (err) {
                     console.error("failed to update", err);
                     reject(err);
