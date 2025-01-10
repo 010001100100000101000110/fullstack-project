@@ -6,12 +6,12 @@ import StudentQuiz from './StudentQuiz';
 * Practice mode where the user plays all words without filtering.
 * User can pick 2 out of 3 languages and which one of them they want to practice writing.
 */
-export default function StudentPlayAllWords() {
+export default function StudentPlayFilteredWords() {
 
-    //all existing words in database
     const [wordpairs, setWordpairs] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
+    //WORK IN PROCESS!! Currently doesnt filter at all
     useEffect(() => {
         const fetchItems = async () => {
             const apiUrl = 'http://localhost:3000/api/wordpairs';
@@ -29,12 +29,12 @@ export default function StudentPlayAllWords() {
             }
         };
         fetchItems();
+
     }, []);
 
-    if (isLoading) {
+    if(isLoading) {
         return <p>Loading words...</p>;
     }
 
     return <StudentQuiz wordlist={wordpairs} />
-
 }

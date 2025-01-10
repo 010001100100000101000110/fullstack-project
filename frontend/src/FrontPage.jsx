@@ -21,7 +21,7 @@ export default function FrontPage() {
                         </ul>
                     </button>
                 </Link>
-                <Link to="/student/play-all" className="role-link">
+                <Link to="/student" className="role-link">
                     <button id="choose-student-btn">
                         <h2>Student</h2>
                         <h3>Stuff:</h3>

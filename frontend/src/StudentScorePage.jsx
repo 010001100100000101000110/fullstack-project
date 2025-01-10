@@ -1,6 +1,10 @@
 import './css/StudentScorePage.css';
-
-
+import PropTypes from 'prop-types';
+/**
+ *
+ * @param {*} param0
+ * @returns A page displaying users score
+ */
 export default function StudentScorePage({answers, score, resetFunc}) {
 
     const handleRetry = () => {
@@ -31,7 +35,19 @@ export default function StudentScorePage({answers, score, resetFunc}) {
             </ul>
             <h2 id="final-score">{score}/{answers.length}</h2>
 
-            <button onClick={handleRetry}>To language selection!</button>
+            <button onClick={handleRetry}>Back to language selection</button>
         </div>
     )
 }
+
+StudentScorePage.propTypes = {
+    answers: PropTypes.arrayOf(
+        PropTypes.shape({
+            a: PropTypes.string.isRequired,
+            q: PropTypes.string.isRequired,
+            correct: PropTypes.bool.isRequired,
+        })
+    ).isRequired,
+    score: PropTypes.number.isRequired,
+    resetFunc: PropTypes.func.isRequired,
+};

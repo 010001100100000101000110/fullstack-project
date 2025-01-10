@@ -1,6 +1,6 @@
 .wordpair {
     display: grid;
-    grid-template-columns: 50px 170px 170px 170px 70px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     align-items: center;
     border-radius: 30px;
     height: 80px;

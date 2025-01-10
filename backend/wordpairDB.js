@@ -7,7 +7,7 @@ const dbFunctions = {
     async initialize() {
         try {
             await new Promise((resolve, reject) => {
-                db.run('CREATE TABLE IF NOT EXISTS Wordpairs (id INTEGER PRIMARY KEY, english TEXT, finnish TEXT, swedish TEXT)', (err) => {
+                db.run('CREATE TABLE IF NOT EXISTS Wordpairs (id INTEGER PRIMARY KEY AUTOINCREMENT, english TEXT, finnish TEXT, swedish TEXT, tags TEXT)', (err) => {
                     if (err) {
                         reject(err);
                     } else {
@@ -28,26 +28,30 @@ const dbFunctions = {
             // Create a table
             console.log("ROWCOUNT", rowCount);
             if (rowCount === 0) {
-                await this.insert("red", "punainen", "röd");
-                await this.insert("yellow", "keltainen", "gul");
-                await this.insert("black", "musta", "svart");
-                await this.insert("cat", "kissa", "katt");
-                await this.insert("mouse", "hiiri", "mus");
+                await this.insert("red", "punainen", "röd", "1");
+                await this.insert("black", "musta", "svart", "1");
+                await this.insert("cat", "kissa", "katt", "2");
+                await this.insert("mouse", "hiiri", "mus", "2");
+                await this.insert("bus", "bussi", "buss", "3");
+                await this.insert("bike", "polkupyörä", "cykel", "3");
+                await this.insert("apple", "omena", "äppel", "4,5");
+                await this.insert("meatballs", "lihapullat", "köttbullar", "4");
             }
 
         } catch (err) {
-            console.err("ERROR WITH INITIALIZING: ", err);
+            console.error("ERROR WITH INITIALIZING: ", err);
         }
     },
 
-    async insert(engWord, finWord, sweWord) {
+    async insert(engWord, finWord, sweWord, tags) {
         return new Promise(async (resolve, reject) => {
             // Insert data
-            db.run(`INSERT INTO Wordpairs(english, finnish, swedish) VALUES (?, ?, ?)`,
-                [engWord, finWord, sweWord], (err) => {
+            db.run(`INSERT INTO Wordpairs(english, finnish, swedish, tags) VALUES (?, ?, ?, ?)`,
+                [engWord, finWord, sweWord, tags], (err) => {
                     if (err) {
                         reject(err);
                     } else {
+                        console.log("INSERTING!!!! TAGS!!: ", tags);
                         resolve();
                     }
                 }
@@ -72,8 +76,8 @@ const dbFunctions = {
     async updateWordpair(id, data) {
         console.info(`updating by id...${id}`);
         return new Promise((resolve, reject) => {
-            const query = `UPDATE Wordpairs SET english = ?, finnish = ?, swedish = ? WHERE id = ?`;
-            db.run(query, [data.english, data.finnish, data.swedish, id], (err) => {
+            const query = `UPDATE Wordpairs SET english = ?, finnish = ?, swedish = ?, tags = ? WHERE id = ?`;
+            db.run(query, [data.english, data.finnish, data.swedish, data.tags, id], (err) => {
                 if (err) {
                     console.error("failed to update", err);
                     reject(err);
