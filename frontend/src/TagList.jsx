@@ -1,5 +1,5 @@
 import axios from "axios";
-import './css/WordTable.css';
+import './css/TagList.css';
 import { useState, useEffect } from "react";
 
 /**

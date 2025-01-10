@@ -15,8 +15,9 @@ export default function AdminPage() {
             <h1>Welcome Admin!</h1>
             <div id="admin-page-contents">
                 <div id="word-managing-container">
+                    <h2>Words</h2>
                     <Link to="/admin/add-words">
-                        <button id="add-words-btn">
+                        <button id="add-words-btn" className="admin-page-btn">
                             Add new wordpair
                         </button>
                     </Link>
@@ -24,8 +25,9 @@ export default function AdminPage() {
                 </div>
 
                 <div id="tag-managing-container">
+                    <h2>Tags</h2>
                     <Link to="/admin/add-tag">
-                        <button id="add-tags-btn">
+                        <button id="add-tags-btn" className="admin-page-btn">
                             Add new tag
                         </button>
                     </Link>

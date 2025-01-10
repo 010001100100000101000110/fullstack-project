@@ -5,6 +5,7 @@ const tagDBFunctions = {
 
     async initialize() {
         try {
+            console.info("initializing tag database...");
             await new Promise((resolve, reject) => {
                 db.run('CREATE TABLE IF NOT EXISTS Tags (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)', (err) => {
                     if (err) {
@@ -25,13 +26,13 @@ const tagDBFunctions = {
                 });
             });
             // Create a table
-            console.log("ROWCOUNT", rowCount);
             if (rowCount === 0) {
                 await this.insert("color");
                 await this.insert("animal");
                 await this.insert("vehicle");
                 await this.insert("food");
                 await this.insert("fruit");
+                await this.insert("country");
             }
 
         } catch (err) {
@@ -40,6 +41,7 @@ const tagDBFunctions = {
     },
 
     async insert(tagName) {
+        console.info(`inserting into tag database...`);
         return new Promise(async (resolve, reject) => {
             // Insert data
             db.run(`INSERT INTO Tags(name) VALUES (?)`,
@@ -48,6 +50,7 @@ const tagDBFunctions = {
                         reject(err);
                     } else {
                         resolve();
+                        console.info(`insert to tag database successful`);
                     }
                 }
             );
@@ -59,27 +62,15 @@ const tagDBFunctions = {
         return new Promise((resolve, reject) => {
             db.get(`SELECT * FROM Tags WHERE id = ?`, [id], (err, row) => {
                 if (err) {
-                    console.error("findById query failed: ", err);
+                    console.error("find tag by id query failed: ", err);
                     reject(err);
                     return;
                 }
+                console.info(`Tag found!`);
                 resolve(row);
             });
         });
     },
-    // async findByName(name) {
-    //     console.info(`finding tag by name...${name}`);
-    //     return new Promise((resolve, reject) => {
-    //         db.get(`SELECT * FROM Tags WHERE name = ?`, [name], (err, row) => {
-    //             if (err) {
-    //                 console.error("Query failed: ", err);
-    //                 reject(err);
-    //                 return;
-    //             }
-    //             resolve(row);
-    //         });
-    //     });
-    // },
 
     async updateTag(id, name) {
         console.info(`updating by id...${id}`);
@@ -87,7 +78,7 @@ const tagDBFunctions = {
             const query = `UPDATE Tags SET name = ? WHERE id = ?`;
             db.run(query, [name, id], (err) => {
                 if (err) {
-                    console.error("failed to update", err);
+                    console.error("Failed to update tag", err);
                     reject(err);
                     return;
                 }
@@ -98,7 +89,7 @@ const tagDBFunctions = {
     },
 
     async getTags() {
-        console.info(`getting all...`);
+        console.info(`getting all tags...`);
         return new Promise(async (resolve, reject) => {
             // Query data
             db.all('SELECT * FROM Tags', [], (err, rows) => {
@@ -106,17 +97,20 @@ const tagDBFunctions = {
                     reject(err);
                 }
                 resolve(rows);
+                console.info("Tag fetched!");
             });
         })
     },
 
     async deleteById(id) {
+        console.info("Deleting tag...");
         return new Promise((resolve, reject) => {
             db.run(`DELETE FROM Tags WHERE id = ?`, [id], (err, row) => {
                 if (err) {
                     reject(err);
                 }
                 resolve(row);
+                console.info("Tag deleted!");
             });
         });
     },

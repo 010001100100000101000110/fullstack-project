@@ -65,26 +65,31 @@ export default function AdminAddWordsPage() {
 
 
     return (
-        <div>
+        <div id="add-words-page">
             <h1>Add word pair</h1>
+            <p>note: all language fields are required</p>
+            <div className="inputs">
+                <input
+                    className='text-input'
+                    type="text"
+                    placeholder="English"
+                    onChange={(event) => setEnglishWord(event.target.value)}
+                />
+                <input
+                    className='text-input'
+                    type="text"
+                    placeholder="Finnish"
+                    onChange={(event) => setFinnishWord(event.target.value)}
+                />
+                <input
+                    className='text-input'
+                    type="text"
+                    placeholder="Swedish"
+                    onChange={(event) => setSwedishWord(event.target.value)}
+                />
+            </div>
 
-            <input
-                type="text"
-                placeholder="English"
-                onChange={(event) => setEnglishWord(event.target.value)}
-            />
-            <input
-                type="text"
-                placeholder="Finnish"
-                onChange={(event) => setFinnishWord(event.target.value)}
-            />
-            <input
-                type="text"
-                placeholder="Swedish"
-                onChange={(event) => setSwedishWord(event.target.value)}
-            />
-
-            <h2>Tag:</h2>
+            <h2>Tags:</h2>
             <ul className='no-bullets'>
                 {tags.map((tag, index) => (
                     <li key={index}>

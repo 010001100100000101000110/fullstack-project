@@ -26,13 +26,17 @@
 }
 
 .english-word {
-    background-color: rgb(255, 128, 128);
+    background-color: rgb(189, 161, 255);
 }
 
 .finnish-word {
-    background-color: rgb(115, 187, 235);
+    background-color: rgb(157, 227, 255);
 }
 
 .swedish-word {
-    background-color: rgb(211, 240, 132);
+    background-color: rgb(250, 255, 175);
+}
+
+.edit-word-btn:hover {
+    background-color: rgb(165, 42, 155);
 }

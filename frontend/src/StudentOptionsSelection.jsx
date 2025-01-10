@@ -77,11 +77,11 @@ export default function StudentOptionsSelection() {
                             Play all words (2 languages)
                         </button>
                     </Link>
-                    <Link to="/student/play-filtered">
+                    {/* <Link to="/student/play-filtered">
                         <button id="play-tag-btn" onClick={handlePreferences}>
                             Play by tag
                         </button>
-                    </Link>
+                    </Link> */}
                 </div>
             </div>
         )

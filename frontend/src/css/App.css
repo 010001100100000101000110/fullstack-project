@@ -1,9 +1,9 @@
 .contents {
-  width: 70%;
+  width: 90%;
   margin: 0;
   padding: 60px 0 200px 0;
   text-align: center;
-  background-color: #15edf9;
+  /* background-color: #15edf9; */
   display: flex;
   flex-direction: column;
   display: flex;
@@ -14,7 +14,7 @@
 }
 
 body {
-  background-color: #8afab8;
+  background-color: #15edf9;
   display: flex;
   flex-direction: column;
   align-content: center;

@@ -6,6 +6,7 @@ const dbFunctions = {
 
     async initialize() {
         try {
+            console.info("initializing wordpair database...");
             await new Promise((resolve, reject) => {
                 db.run('CREATE TABLE IF NOT EXISTS Wordpairs (id INTEGER PRIMARY KEY AUTOINCREMENT, english TEXT, finnish TEXT, swedish TEXT, tags TEXT)', (err) => {
                     if (err) {
@@ -26,7 +27,6 @@ const dbFunctions = {
                 });
             });
             // Create a table
-            console.log("ROWCOUNT", rowCount);
             if (rowCount === 0) {
                 await this.insert("red", "punainen", "röd", "1");
                 await this.insert("black", "musta", "svart", "1");
@@ -44,6 +44,7 @@ const dbFunctions = {
     },
 
     async insert(engWord, finWord, sweWord, tags) {
+        console.info(`inserting into wordpair database...`);
         return new Promise(async (resolve, reject) => {
             // Insert data
             db.run(`INSERT INTO Wordpairs(english, finnish, swedish, tags) VALUES (?, ?, ?, ?)`,
@@ -51,8 +52,8 @@ const dbFunctions = {
                     if (err) {
                         reject(err);
                     } else {
-                        console.log("INSERTING!!!! TAGS!!: ", tags);
                         resolve();
+                        console.info(`insert to wordpair database successful`);
                     }
                 }
             );
@@ -60,26 +61,27 @@ const dbFunctions = {
     },
 
     async findById(id) {
-        console.info(`finding by id...${id}`);
+        console.info(`finding wordpair by id...${id}`);
         return new Promise((resolve, reject) => {
             db.get(`SELECT * FROM Wordpairs WHERE id = ?`, [id], (err, row) => {
                 if (err) {
-                    console.error("Query failed: ", err);
+                    console.error("FindById query failed: ", err);
                     reject(err);
                     return;
                 }
+                console.info(`Wordpair found!`);
                 resolve(row);
             });
         });
     },
 
     async updateWordpair(id, data) {
-        console.info(`updating by id...${id}`);
+        console.info(`updating wordpair by id...${id}`);
         return new Promise((resolve, reject) => {
             const query = `UPDATE Wordpairs SET english = ?, finnish = ?, swedish = ?, tags = ? WHERE id = ?`;
             db.run(query, [data.english, data.finnish, data.swedish, data.tags, id], (err) => {
                 if (err) {
-                    console.error("failed to update", err);
+                    console.error("failed to update wordpair", err);
                     reject(err);
                     return;
                 }
@@ -90,25 +92,28 @@ const dbFunctions = {
     },
 
     async getWordpairs() {
-        console.info(`getting all...`);
+        console.info(`getting all wordpairs...`);
         return new Promise(async (resolve, reject) => {
             // Query data
             db.all('SELECT * FROM Wordpairs', [], (err, rows) => {
                 if (err) {
                     reject(err);
                 }
+                console.info(`Wordpairs fetched!`);
                 resolve(rows);
             });
         })
     },
 
     async deleteById(id) {
+        console.info("Deleting wordpair...");
         return new Promise((resolve, reject) => {
             db.run(`DELETE FROM Wordpairs WHERE id = ?`, [id], (err, row) => {
                 if (err) {
                     reject(err);
                 }
                 resolve(row);
+                console.info("Wordpair deleted!");
             });
         });
     },

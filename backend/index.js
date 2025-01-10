@@ -19,11 +19,14 @@ app.use("/api/tags", tagRouter);
 app.listen(port, () => {
     console.log(`Server running on port ${port}`)
 })
+//initialize databases
+wordpairDBFunctions.initialize();
+tagDBFunctions.initialize();
 
 //routes implementation
 wordpairRouter.get("/", async (req, res) => {
     try {
-        await wordpairDBFunctions.initialize();
+        //await wordpairDBFunctions.initialize();
         const wordpairs = await wordpairDBFunctions.getWordpairs();
         res.json(wordpairs);
     } catch (err) {
@@ -97,22 +100,6 @@ wordpairRouter.delete("/:id", async (req, res) => {
 //tag routing
 tagRouter.get("/", async (req, res) => {
     try {
-        // const { id, name } = req.query;
-        // if (id) {
-        //     const tag = await tagDBFunctions.findById(id);
-        //     if (!tag) {
-        //         return res.status(404).json({ error: "Tag not found" });
-        //     }
-        //     res.json(tag);
-        // } else if (name) {
-        //     const tag = await tagDBFunctions.findByName(id);
-        //     if (!tag) {
-        //         return res.status(404).json({ error: "Tag not found" });
-        //     }
-        //     res.json(tag);
-        // }
-        //return all tags
-        await tagDBFunctions.initialize();
         const tags = await tagDBFunctions.getTags();
         res.json(tags);
     } catch (err) {
@@ -134,29 +121,6 @@ tagRouter.get("/:id", async (req, res) => {
         res.status(500).json({ error: "Failed to fetch tag by ID" });
     }
 });
-
-// tagRouter.get("/", async (req, res) => {
-//     try {
-//         const { id, name } = req.query;
-//         if (id) {
-//             const tag = await tagDBFunctions.findById(id);
-//             if (!tag) {
-//                 return res.status(404).json({ error: "Tag not found" });
-//             }
-//             res.json(tag);
-//         } else if (name) {
-//             const tag = await tagDBFunctions.findByName(id);
-//             if (!tag) {
-//                 return res.status(404).json({ error: "Tag not found" });
-//             }
-//             res.json(tag);
-//         }
-//         res.status(404).json({ error: "Provide either 'id' or 'name' as query parameter" });
-//     } catch (err) {
-//         console.error("Error fetching tag: ", err);
-//         res.status(500).json({ error: "Failed to fetch tag." });
-//     }
-// });
 
 tagRouter.post("/", async (req, res) => {
     try {

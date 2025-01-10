@@ -3,12 +3,12 @@
     flex-direction: column;
     align-content: center;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     align-self: center;
-    background-color: #f2a4c6;
+    background-color: #ffceff;
     list-style-type: none;
-    width: 70%;
-    max-height: 380px;
+    width: 90%;
+    max-height: 400px;
     overflow-y: auto;
     border-radius: 40px;
     padding: 10px;
