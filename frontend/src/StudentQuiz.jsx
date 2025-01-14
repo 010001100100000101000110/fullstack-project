@@ -26,17 +26,30 @@ export default function StudentQuiz({ wordlist }) {
 
     const [preferences, setPreferences] = useState(null);
 
+    const [isLoading, setIsLoading] = useState(true);
+
+
     //fetch preferences
     useEffect(() => {
-        const storedPreference = localStorage.getItem('preferences');
-        if (storedPreference) {
-            setPreferences(JSON.parse(storedPreference));
-            console.log("PREFERENCES: ", JSON.parse(storedPreference))
+        try {
+            const storedPreference = localStorage.getItem('preferences');
+            if (storedPreference) {
+                setPreferences(JSON.parse(storedPreference));
+                console.log("PREFERENCES: ", JSON.parse(storedPreference))
+            }
+            setWordpairs(wordlist);
+            console.log("WORDLIST", wordlist);
+            getRandomPair(wordlist);
+        } catch (err) {
+            console.error("error getting preferences: ", err);
+        } finally {
+            setIsLoading(false);
         }
-        setWordpairs(wordlist);
-        console.log("WORDLIST", wordlist);
-        getRandomPair(wordlist);
+
     }, []);
+    if (isLoading || !currentWordpair) {
+        return <p>Loading...</p>;
+    }
 
 
     /**
@@ -109,11 +122,6 @@ export default function StudentQuiz({ wordlist }) {
         }
         return currentWordpair[preferences.languages.lang1];
     }
-    //show loading text if a wordpair hasn't been fetched yet
-    if (!currentWordpair) {
-        return <p>Loading...</p>;
-    }
-
 
     //show score after playthrough
     if (gameOver) {

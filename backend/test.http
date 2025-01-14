@@ -1,12 +1,10 @@
-# GET all locations
 GET http://localhost:3000/api/wordpairs
 
 ###
 
-GET http://localhost:3000/api/wordpairs/3
+GET http://localhost:3000/api/wordpairs/12
 
 ###
-
 
 PUT http://localhost:3000/api/wordpairs/3
 Content-Type: application/json
@@ -18,3 +16,20 @@ Content-Type: application/json
 ###
 
 DELETE http://localhost:3000/api/wordpairs/2
+
+###
+
+GET http://localhost:3000/api/wordpairs?filter=6
+
+###
+PUT http://localhost:3000/api/tags/6
+Content-Type: application/json
+
+{
+  "name": "beeb"
+}
+
+###
+GET http://localhost:3000/api/tags
+
+###

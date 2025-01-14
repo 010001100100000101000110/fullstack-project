@@ -24,7 +24,6 @@ export default function StudentPlayAllWords() {
             } catch (error) {
                 console.error("Error fetching wordpairs: ", error);
             } finally {
-                console.log("HGELÖÖ");
                 setIsLoading(false);
             }
         };
@@ -32,7 +31,7 @@ export default function StudentPlayAllWords() {
     }, []);
 
     if (isLoading) {
-        return <p>Loading words...</p>;
+        return <p>Loading...</p>;
     }
 
     return <StudentQuiz wordlist={wordpairs} />

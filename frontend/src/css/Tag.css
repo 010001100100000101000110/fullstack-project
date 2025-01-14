@@ -1,0 +1,8 @@
+.tag-list-element {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    height: 80px;
+    border-color: black;
+    border-width: 2px;
+}

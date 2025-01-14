@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
+import axios from "axios";
+
 /**
  *
  * @returns
@@ -9,20 +11,55 @@ export default function StudentOptionsSelection() {
     const [askLanguages, setAskLanguages] = useState(true);
     //boolean determining, if user is displayed a choice of which of the chosen languages do they want to practice writing
     const [askWritingLanguage, setAskWritingLanguage] = useState(false);
+
+    const [askTag, setAskTag] = useState(false);
+    const [tags, setTags] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [selectedTag, setSelectedTag] = useState("");
+
     //holds the two languages the user picks
     const [languages, setLanguages] = useState({ lang1: "english", lang2: "finnish" });
     //the language the user wants to write
     const [writingLanguage, setWritingLanguage] = useState("finnish");
 
+    const handleTagChange = (tag) => {
+        console.log("TAG: ", tag);
+        setSelectedTag(tag);
+    }
+    useEffect(() => {
+        const fetchTags = async () => {
+            try {
+                const apiUrl = `http://localhost:3000/api/tags`;
+                const response = await axios.get(apiUrl);
+                setTags(response.data);
+                setIsLoading(false);
+            } catch (error) {
+                console.error("Error fetching tags: ", error);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+        fetchTags();
+    }, []);
+
+    if(isLoading) {
+        return <p>Loading...</p>;
+    }
+
     const handlePreferences = () => {
         console.log("HANDLING PREFERENCES");
         const preferences = {
             languages,
-            writingLanguage
+            writingLanguage,
+            tagId: selectedTag
         };
+        console.log("SELECTED TAG ", selectedTag);
         localStorage.setItem("preferences", JSON.stringify(preferences));
     }
 
+    const handleTagModeSelect = () => {
+        setAskTag(true);
+    }
     function handleLanguageSelect(lang1, lang2) {
         setLanguages({ lang1, lang2 });
         setAskLanguages(false);
@@ -63,7 +100,21 @@ export default function StudentOptionsSelection() {
             </div>
         )
     }
-
+    if (askTag) {
+        return (
+            <div id="tag-selection">
+                <h2>Choose the tag you want to practice!</h2>
+                <select name="tag" onChange={event => handleTagChange(event.target.value)}>
+                {tags.map((tag, index) => (
+                        <option key={index}value={tag.id} >{tag.name}</option>
+                ))}
+                </select>
+                <Link to="/student/play-filtered">
+                    <button onClick={handlePreferences}>Practice!</button>
+                </Link>
+            </div>
+        )
+    }
     if (!askLanguages && !askWritingLanguage) {
         return (
             <div>
@@ -77,14 +128,15 @@ export default function StudentOptionsSelection() {
                             Play all words (2 languages)
                         </button>
                     </Link>
-                    {/* <Link to="/student/play-filtered">
-                        <button id="play-tag-btn" onClick={handlePreferences}>
-                            Play by tag
-                        </button>
-                    </Link> */}
+                    <button id="play-tag-btn" onClick={handleTagModeSelect}>
+                        Play by tag
+                    </button>
+
                 </div>
             </div>
         )
 
     }
+
+
 }

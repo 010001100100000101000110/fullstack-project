@@ -1,7 +1,7 @@
 import axios from "axios";
 import './css/TagList.css';
 import { useState, useEffect } from "react";
-
+import Tag from "./Tag";
 /**
  * shows a table of wordpairs
  */
@@ -21,10 +21,13 @@ export default function TagList() {
         fetchItems();
     }, []);
 
+
     return (
         <ul className="taglist">
             {tags.map((tag) => (
-                <li key={tag.id}> {tag.name} </li>
+                <li key={tag.id}>
+                    <Tag tag={tag} />
+                </li>
             ))}
         </ul>
     )

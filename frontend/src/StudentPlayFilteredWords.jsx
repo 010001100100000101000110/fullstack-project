@@ -8,23 +8,23 @@ import StudentQuiz from './StudentQuiz';
 */
 export default function StudentPlayFilteredWords() {
 
-    const [wordpairs, setWordpairs] = useState([]);
+    const [wordpairs, setWordpairs] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
     //WORK IN PROCESS!! Currently doesnt filter at all
     useEffect(() => {
         const fetchItems = async () => {
-            const apiUrl = 'http://localhost:3000/api/wordpairs';
-            try {
-                console.log("HGELÖÖ");
-                const response = await axios.get(apiUrl);
 
+            const preferences = await JSON.parse(localStorage.getItem("preferences"));
+            const apiUrl = `http://localhost:3000/api/wordpairs?filter=${preferences.tagId}`;
+            try {
+                console.log("PREFERENCES ", preferences);
+                const response = await axios.get(apiUrl);
                 setWordpairs(response.data);
 
             } catch (error) {
                 console.error("Error fetching wordpairs: ", error);
             } finally {
-                console.log("HGELÖÖ");
                 setIsLoading(false);
             }
         };
@@ -32,8 +32,8 @@ export default function StudentPlayFilteredWords() {
 
     }, []);
 
-    if(isLoading) {
-        return <p>Loading words...</p>;
+    if (isLoading) {
+        return <p>Loading...</p>;
     }
 
     return <StudentQuiz wordlist={wordpairs} />

@@ -1,39 +1,32 @@
-//page which allows the admin to edit wordpairs
+//page which allows the admin to edit tags
 import './css/AdminEditWordsPage.css';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import axios from "axios";
 
 
-//**
-//
-//
-//
-// */
 export default function AdminEditWordsPage() {
     const { id } = useParams();
-    const [wordpair, setWordpair] = useState(null);
-    const [englishWord, setEnglishWord] = useState("");
-    const [finnishWord, setFinnishWord] = useState("");
-    const [swedishWord, setSwedishWord] = useState("");
-    const [wordsDeleted, setWordsDeleted] = useState(false);
+    const [tag, setTag] = useState(null);
+    const [newTagName, setNewTagName] = useState(null);
+    const [tagDeleted, setTagDeleted] = useState(false);
     const [showSaveMessage, setShowSaveMessage] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchWordpair = async () => {
+        const fetchTag = async () => {
             try {
-                const apiUrl = `http://localhost:3000/api/wordpairs/${id}`;
+                const apiUrl = `http://localhost:3000/api/tags/${id}`;
                 const response = await axios.get(apiUrl);
-                setWordpair(response.data);
-                setEnglishWord(response.data.english);
-                setFinnishWord(response.data.finnish);
-                setSwedishWord(response.data.swedish);
+                console.log(response);
+                console.log(response.data);
+                setTag(response.data);
+                setNewTagName(response.data.name);
             } catch (error) {
                 console.error("Error getting data: ", error);
             }
         }
-        fetchWordpair();
+        fetchTag();
     }, [id]);
 
     //**
@@ -41,10 +34,10 @@ export default function AdminEditWordsPage() {
     // */
     const handleSave = async () => {
         try {
+            console.log("ID: ", id, "TAG: ", tag)
             setShowSaveMessage(true);
-            const apiUrl = `http://localhost:3000/api/wordpairs/${id}`;
-            const wordpair = { english: englishWord, finnish: finnishWord, swedish: swedishWord }
-            const response = await axios.put(apiUrl, wordpair);
+            const apiUrl = `http://localhost:3000/api/tags/${id}`;
+            const response = await axios.put(apiUrl, {name: newTagName});
             setTimeout(() => {
                 console.log("RESPONSE: ", response);
                 setShowSaveMessage(false);
@@ -54,7 +47,7 @@ export default function AdminEditWordsPage() {
         }
     }
 
-    if (!wordpair) {
+    if (!tag) {
         return <h2>Loading...</h2>
     }
 
@@ -63,12 +56,12 @@ export default function AdminEditWordsPage() {
     // */
     const handleDelete = async () => {
         try {
-            setWordsDeleted(true);
-            const apiUrl = `http://localhost:3000/api/wordpairs/${id}`;
+            setTagDeleted(true);
+            const apiUrl = `http://localhost:3000/api/tags/${id}`;
             const response = await axios.delete(apiUrl);
             setTimeout(() => {
                 console.log("RESPONSE: ", response);
-                setWordsDeleted(false);
+                setTagDeleted(false);
                 navigate('/admin', { replace: true });
             }, 2000);
         } catch (error) {
@@ -76,7 +69,7 @@ export default function AdminEditWordsPage() {
         }
     }
 
-    if (wordsDeleted) {
+    if (tagDeleted) {
         return (
             <p>Wordpair deleted.</p>
         )
@@ -84,44 +77,32 @@ export default function AdminEditWordsPage() {
     return (
         <div>
             <div>
-                <p>{wordpair.id}</p>
-                <h1>Edit word pair</h1>
+                <p>{tag.id}</p>
+                <h1>Edit tag</h1>
 
                 <input
                     type="text"
-                    placeholder="English"
-                    defaultValue={wordpair.english}
-                    onChange={(event) => setEnglishWord(event.target.value)}
-                />
-                <input
-                    type="text"
-                    placeholder="Finnish"
-                    defaultValue={wordpair.finnish}
-                    onChange={(event) => setFinnishWord(event.target.value)}
-                />
-                <input
-                    type="text"
-                    placeholder="Swedish"
-                    defaultValue={wordpair.swedish}
-                    onChange={(event) => setSwedishWord(event.target.value)}
+                    placeholder="Tag name"
+                    defaultValue={tag.name}
+                    onChange={(event) => setNewTagName(event.target.value)}
                 />
 
                 <button
-                    className="save-words-btn"
+                    className="save-tag-btn"
                     onClick={handleSave}
                 >
                     Save
                 </button>
 
                 <Link to="/admin">
-                    <button id="choose-student-btn">
+                    <button>
                         Go back
                     </button>
                 </Link>
 
                 <button className="delete-btn" onClick={handleDelete}></button>
 
-                {showSaveMessage && <p>Wordpair saved!</p>}
+                {showSaveMessage && <p>Tag saved!</p>}
             </div>
         </div>
     )
