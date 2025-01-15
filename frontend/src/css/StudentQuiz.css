@@ -1,0 +1,11 @@
+.quiz-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.quiz-page button {
+    background-color: pink;
+    padding: 10px;
+}

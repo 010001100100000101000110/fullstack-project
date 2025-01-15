@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import Loading from "./Loading";
+import './css/StudentPreferencesSelection.css'
 /**
  *
  * @returns
@@ -23,7 +24,6 @@ export default function StudentPreferencesSelection() {
     const [writingLanguage, setWritingLanguage] = useState("finnish");
 
     const handleTagChange = (tag) => {
-        console.log("TAG: ", tag);
         setSelectedTag(tag);
     }
     useEffect(() => {
@@ -47,13 +47,11 @@ export default function StudentPreferencesSelection() {
     }
 
     const handlePreferences = () => {
-        console.log("HANDLING PREFERENCES");
         const preferences = {
             languages,
             writingLanguage,
             tagId: selectedTag
         };
-        console.log("SELECTED TAG ", selectedTag);
         localStorage.setItem("preferences", JSON.stringify(preferences));
     }
 
@@ -71,11 +69,12 @@ export default function StudentPreferencesSelection() {
         setWritingLanguage(language);
     }
 
+    //Ask user which two languages they'd like to practice
     if (askLanguages) {
         return (
             <div>
-                <h2>I want to practice...</h2>
-                <div id="lang-select">
+                <h2>Which language pair would you like to practice?</h2>
+                <div className="lang-select">
                     <button onClick={() => handleLanguageSelect("english", "swedish")}>
                         English - Swedish
                     </button>
@@ -91,23 +90,26 @@ export default function StudentPreferencesSelection() {
         )
     }
 
+    //Ask user which language of the chosen two they'd like to practice
     if (askWritingLanguage) {
         return (
-            <div>
+            <div className="lang-select">
                 <h2>Which language do you want to practice writing?</h2>
                 <button onClick={() => handleChoice(languages.lang1)}>{languages.lang1}</button>
                 <button onClick={() => handleChoice(languages.lang2)}>{languages.lang2}</button>
             </div>
         )
     }
+
+    //Ask user which tag they'd like to practice
     if (askTag) {
         return (
             <div id="tag-selection">
                 <h2>Choose the tag you want to practice!</h2>
                 <select name="tag" onChange={event => handleTagChange(event.target.value)}>
-                {tags.map((tag, index) => (
-                        <option key={index}value={tag.id} >{tag.name}</option>
-                ))}
+                    {tags.map((tag, index) => (
+                        <option key={index} value={tag.id} >{tag.name}</option>
+                    ))}
                 </select>
                 <Link to="/student/play-filtered">
                     <button onClick={handlePreferences}>Practice!</button>
@@ -115,6 +117,8 @@ export default function StudentPreferencesSelection() {
             </div>
         )
     }
+
+    //if language preferences are set, ask user which practice mode they want
     if (!askLanguages && !askWritingLanguage) {
         return (
             <div>
@@ -133,4 +137,6 @@ export default function StudentPreferencesSelection() {
             </div>
         )
     }
+
+
 }

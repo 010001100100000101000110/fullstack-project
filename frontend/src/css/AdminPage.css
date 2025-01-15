@@ -10,18 +10,7 @@
 }
 
 #admin-page-contents {
-    /* display: flex;
-    flex-direction: row;
-    align-content: center;
-    align-items: flex-start;
-    justify-content: center;
-    align-self: center; */
     display: grid;
     grid-template-columns: 70% 30%;
     gap: 15px;
-}
-
-.admin-page-btn {
-    height: 40px;
-    background-color: rgb(176, 255, 180);
 }

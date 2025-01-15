@@ -1,0 +1,14 @@
+.lang-select button::first-letter {
+    text-transform: capitalize;
+}
+
+#tag-selection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+#tag-selection select {
+    background-color: rgb(223, 189, 255);
+}

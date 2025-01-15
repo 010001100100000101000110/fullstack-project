@@ -14,6 +14,7 @@ tagRouter.get("/", async (req, res) => {
 
 tagRouter.get("/:id", async (req, res) => {
     try {
+        console.log("PASKA");
         const { id } = req.params;
         const tag = await tagDBFunctions.findById(id);
         if (!tag) {

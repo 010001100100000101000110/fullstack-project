@@ -1,17 +1,12 @@
 .taglist {
-    max-height: 600px;
-    overflow-y: auto;
-}
-
-.taglist {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
-    max-height: 600px;
-    overflow-y: auto;
+    /* max-height: 600px;
+    overflow-y: auto; */
     background-color: rgb(184, 184, 255);
-    padding: 20px;
-    margin: 0px;
+    padding: 15px;
+
 }
 
 .taglist div {
@@ -19,8 +14,5 @@
 }
 
 .taglist h3 {
-    margin: 0;
-    padding: 0;
-    text-align: center;
     text-decoration-line: underline;
 }

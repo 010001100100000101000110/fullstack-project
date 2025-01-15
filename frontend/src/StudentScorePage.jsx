@@ -25,9 +25,11 @@ export default function StudentScorePage({answers, score, resetFunc}) {
                         <p>{i + 1}</p>
                         <p>{answer.q}</p>
                         <p>
-                            <span style={{ textDecoration: 'line-through' }}>
-                                {answer.a}
-                            </span>
+                            {!answer.correct &&
+                                <span style={{ textDecoration: 'line-through' }}>
+                                    {answer.a}
+                                </span>
+                            }
                             {` ${answer.correctA}`}
                         </p>
                         <p className={answer.correct  ? "ans-correct" : "ans-incorrect"}>{answer.correct ? "1" : "0"}</p>

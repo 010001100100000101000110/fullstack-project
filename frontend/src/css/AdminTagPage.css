@@ -1,0 +1,11 @@
+.tag-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tag-name-input {
+    padding: 7px;
+    margin: 20px;
+    background-color: rgb(226, 201, 255);
+}

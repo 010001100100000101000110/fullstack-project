@@ -52,7 +52,7 @@ export default function Wordpair({pair}) {
             <p className="finnish-word">{pair.finnish}</p>
             <p className="swedish-word">{pair.swedish}</p>
             <p className="wordpair-tag">{tags ? tags : "No tags"}</p>
-            <button className="edit-word-btn" onClick={handleEditClick}>
+            <button className="edit-btn" onClick={handleEditClick}>
                 Edit
             </button>
         </div>

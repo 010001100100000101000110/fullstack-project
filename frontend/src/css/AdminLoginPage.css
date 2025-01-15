@@ -6,25 +6,6 @@
     align-content: center;
     align-self: center;
     padding: 20px;
-
-    /* width: 500px;
-    background-color: antiquewhite;
-    border-radius: 40px;
-    border-width: 0 10px 10px 0;
-    border-style: solid;
-    border-color: rgb(189, 167, 139); */
-}
-
-#login-btn {
-    margin-top: 15px;
-    background-color: #f2a4c6;
-    border-width: 0 4px 4px 0;
-    border-style: solid;
-    border-color: #a56581;
-}
-
-#login-btn:hover {
-    background-color: #ff5ea4;
 }
 
 #login-msg {

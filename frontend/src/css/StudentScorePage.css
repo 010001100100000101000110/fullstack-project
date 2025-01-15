@@ -21,6 +21,11 @@
     overflow-x: hidden;
 }
 
+#score-page button {
+    background-color: pink;
+    padding: 10px;
+}
+
 .header,
 .row {
     display: contents;

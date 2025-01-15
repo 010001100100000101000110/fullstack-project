@@ -1,4 +1,4 @@
-import './css/StudentPlayAllWords.css'
+import './css/StudentQuiz.css'
 import { useState, useEffect } from "react";
 import StudentScorePage from './StudentScorePage';
 import PropTypes from 'prop-types';
@@ -69,7 +69,7 @@ export default function StudentQuiz({ wordlist }) {
     * Stores the given word, written word, and if the answer was correct or not.
     */
     function handleAnswer() {
-        if (!currentWordpair) return;
+        if (!answer) return;
         //compare if answer is correct
         const isCorrect =
             (preferences.writingLanguage === "finnish" && answer === currentWordpair.finnish) ||
@@ -93,6 +93,7 @@ export default function StudentQuiz({ wordlist }) {
         } else {
             getRandomPair(wordpairs);
         }
+        setAnswer("");
         setShowAnswerMessage(true);
         setTimeout(() => {
             setShowAnswerMessage(false);
@@ -144,23 +145,21 @@ export default function StudentQuiz({ wordlist }) {
     }
 
     return (
-        <div>
+        <div className="quiz-page">
             <h1>Write the correct word!</h1>
-            <p>
+            <h3>
                 {getPromptWord()}
-            </p>
+            </h3>
             <input
                 type="text"
                 placeholder={`in ${preferences.writingLanguage}`}
                 onChange={(event) => setAnswer(event.target.value)}
+                value={answer}
             />
             <button onClick={handleAnswer}>Confirm</button>
-            {showAnswerMessage && <p>answered</p>}
-
+            {showAnswerMessage && <p>answer submitted</p>}
         </div>
     )
-
-
 }
 
 StudentQuiz.propTypes = {

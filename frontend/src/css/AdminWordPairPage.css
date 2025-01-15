@@ -1,0 +1,27 @@
+.inputs input {
+    padding: 7px;
+    margin: 20px;
+    background-color: rgb(226, 201, 255);
+}
+
+.tag-list-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.tag-list {
+    margin: 3% 250px;
+    width: 20%;
+    align-self: center;
+}
+
+.save-btn {
+    background-color: pink;
+    padding: 10px;
+}
+
+.delete-btn {
+    background-color: rgb(255, 0, 43);
+    padding: 10px;
+}

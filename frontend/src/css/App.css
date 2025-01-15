@@ -1,20 +1,17 @@
 .contents {
-  width: 75%;
-  min-height: 100%;
+  width: 80%;
+  min-height: 600px;
   margin: 0;
-  padding: 60px 0 200px 0;
+  padding: 60px 0 100px 0;
   text-align: center;
-  /* background-color: #15edf9; */
   background-color: rgb(133, 255, 255);
   display: flex;
   flex-direction: column;
   display: flex;
   align-content: flex-start;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   align-self: center;
-
-  /* border-color: rgb(31, 192, 255); */
   border-radius: 40px;
   border-color: rgb(120, 255, 94);
   border-width: 30px;
@@ -24,7 +21,7 @@
 body {
   background-image: url("/images/background.png");
   background-size: 30%;
-  background-position: center;
+  background-position: fixed;
   background-repeat: repeat;
 
   display: flex;
@@ -37,16 +34,40 @@ body {
 
 button {
   cursor: pointer;
+  background-color: rgb(255, 192, 236);
+  padding: 10px;
+  margin: 15px;
+  border-width: 0 4px 4px 0;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: rgb(211, 144, 191);
+}
+
+button:hover {
+  background-color: rgb(255, 157, 225);
+  border-width: 4px 0px 0px 4px;
+}
+
+.edit-btn {
+  margin: 0 5px;
+  background-color: rgb(194, 255, 197);
+  border-radius: 3px;
+  border-width: 5px;
+  border-style: outset;
+  border-color: rgb(153, 255, 143);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.edit-btn:hover {
+  background-color: rgb(169, 255, 158);
+  border-style: inset;
+  border-width: 5px;
 }
 
 #root {
   width: 100%;
-  /* display: flex;
-  flex-direction: column;
-  align-content: center;
-  align-items: center;
-  justify-content: center;
-  align-self: center; */
 }
 
 .app {
@@ -55,6 +76,7 @@ button {
   flex-direction: column;
 }
 
-.no-bullets {
-  list-style-type: none;
+input {
+  background-color: rgb(227, 198, 255);
+  padding: 7px;
 }

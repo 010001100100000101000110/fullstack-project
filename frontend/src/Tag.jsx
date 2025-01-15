@@ -10,7 +10,7 @@ export default function Tag({tag}) {
     return (
         <div className='tag-list-element'>
             <p className='tag-name'>{tag.name}</p>
-            <button className="edit-tag-btn" onClick={() => handleClick(tag.id)}>
+            <button className="edit-btn" onClick={() => handleClick(tag.id)}>
                 Edit
             </button>
         </div>
