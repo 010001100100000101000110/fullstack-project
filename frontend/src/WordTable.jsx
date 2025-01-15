@@ -3,18 +3,24 @@ import './css/WordTable.css';
 import Wordpair from './Wordpair';
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+
 /**
- * WordTable component fetches and displays a list of word pairs from the backend API.
- * It shows a table with columns for English, Finnish, Swedish words, tags and an edit button.
+ * WordTable component fetches and displays a table of word pairs.
+ * It has columns for English, Finnish, Swedish words, tags and an edit button.
  *
- * @returns JSX element representing a table of word pairs.
+ * @returns A JSX element containing a table of word pairs that are rendered by the Wordpair component.
  */
 export default function WordTable() {
-    //State for fetched word pairs from backend
+
+    //State to store the fetched word pairs
     const [wordpairs, setWordpairs] = useState([]);
+    //Hook to track location to re-fetch data on location change
     const location = useLocation();
-    //When component is mounted, fetch all word pairs from backend API
+
     useEffect(() => {
+        /**
+         * fetchItems function fetches all word pairs from the backend API.
+         */
         const fetchItems = async () => {
             try {
                 //GET request to backend to fetch all word pairs
@@ -23,13 +29,14 @@ export default function WordTable() {
                 setWordpairs(response.data);
             } catch (error) {
                 //Log any errors that occur during the fetch
-                console.error("Error fetching wordpairs: ", error);
+                console.error("Error fetching wordpairs: ", error.message);
             }
         };
-        //Call the function to get the word pairs
+        //Call the function to fetch the word pairs when component mounts or location changes
         fetchItems();
     },[location]);
 
+    //Render the word table consisting of multiple Wordpair components
     return (
         <div className="wordtable">
             {/* Headers for the word pair grid */}

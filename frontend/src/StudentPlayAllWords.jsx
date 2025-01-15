@@ -17,13 +17,10 @@ export default function StudentPlayAllWords() {
         const fetchItems = async () => {
             const apiUrl = 'http://localhost:3000/api/wordpairs';
             try {
-                console.log("HGELÖÖ");
                 const response = await axios.get(apiUrl);
-
                 setWordpairs(response.data);
-
             } catch (error) {
-                console.error("Error fetching wordpairs: ", error);
+                console.error("Error fetching wordpairs: ", error.message);
             } finally {
                 setIsLoading(false);
             }

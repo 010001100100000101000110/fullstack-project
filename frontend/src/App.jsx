@@ -2,21 +2,24 @@ import "./css/App.css";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import NavBar from "./NavBar";
+import BackButton from "./BackButton";
 import FrontPage from "./FrontPage";
+
 import AdminLoginPage from "./AdminLoginPage";
 import AdminPage from "./AdminPage";
 import AdminAddWordsPage from "./AdminAddWordsPage";
 import AdminEditWordsPage from "./AdminEditWordsPage";
 import AdminAddTagsPage from "./AdminAddTagsPage";
 import AdminEditTagsPage from "./AdminEditTagsPage";
-// import StudentMainPage from "./StudentMainPage";
+
 import StudentPlayAllWords from "./StudentPlayAllWords";
 import StudentPlayFilteredWords from "./StudentPlayFilteredWords";
 import StudentPreferencesSelection from "./StudentPreferencesSelection";
-import BackButton from "./BackButton";
+
 /**
+ * Main App component that sets up routing and includes all the pages and components used in the application.
  *
- * @returns
+ * @returns JSX element for the entire app, including routing and navigation.
  */
 function App() {
   return (

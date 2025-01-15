@@ -39,8 +39,8 @@ export default function StudentQuiz({ wordlist }) {
             }
             setWordpairs(wordlist);
             getRandomPair(wordlist);
-        } catch (err) {
-            console.error("error getting preferences: ", err);
+        } catch (error) {
+            console.error("error getting preferences: ", error.message);
         } finally {
             setIsLoading(false);
         }
@@ -161,7 +161,7 @@ export default function StudentQuiz({ wordlist }) {
         </div>
     )
 }
-
+//Prop validation for the StudentQuiz component
 StudentQuiz.propTypes = {
     wordlist: PropTypes.arrayOf(
         PropTypes.shape({

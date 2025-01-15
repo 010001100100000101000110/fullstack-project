@@ -2,19 +2,23 @@ import './css/Wordpair.css';
 import PropTypes from 'prop-types';
 import { useState, useEffect } from "react";
 import axios from "axios";
+
 /**
- * Wordpair component displays a single word pair, showing the English, Finnish, and Swedish translations.
- * It also displays the tags associated with the word pair and provides an option to edit the word pair.
+ * Wordpair component displays a single word pair with translations in English, Finnish, and Swedish.
+ * It also shows the associated tags and an editing button that redirects to an edit page
  *
- * @param {Object} pair - The word pair object containing details about the word pair.
- * @returns JSX element representing a single word pair with translation and associated tags.
+ * @param {Object} pair - The word pair object containing details of the word pair.
+ *
+ * @returns A JSX Component containing the word pair details and an edit button.
  */
 export default function Wordpair({pair}) {
     //State to hold the word pair's tags
     const [tags, setTags] = useState(null);
 
-    //When the component is mounted, fetch the word pair's tags
     useEffect(() => {
+        /**
+         * fetchTags function fetches the tags associated with the word pair by its tag IDs.
+         */
         const fetchTags = async () => {
             //Exit the hook if the word pair has no tags
             if (!pair.tags) return;
@@ -31,7 +35,7 @@ export default function Wordpair({pair}) {
                     tagNameArray.push(response.data.name);
                 } catch (error) {
                     //Log any errors that occur during tag fetch
-                    console.error("Error fetching tag: ", error);
+                    console.error("Error fetching tag: ", error.message);
                 }
             }
             //Set the tags
@@ -46,6 +50,7 @@ export default function Wordpair({pair}) {
         window.location.href = `/admin/edit-words/${pair.id}`;
     }
 
+    //Render the word pair object
     return (
         <div className="wordpair">
             <p className="english-word">{pair.english}</p>
@@ -59,6 +64,7 @@ export default function Wordpair({pair}) {
     )
 }
 
+//Prop validation for the Wordpair component
 Wordpair.propTypes = {
     pair: PropTypes.shape({
         id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,

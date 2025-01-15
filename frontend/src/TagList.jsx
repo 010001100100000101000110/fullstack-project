@@ -2,20 +2,31 @@ import axios from "axios";
 import './css/TagList.css';
 import { useState, useEffect } from "react";
 import Tag from "./Tag";
+
 /**
- * shows a table of wordpairs
+ * TagList component fetches and displays a list of tags.
+ * It renders a list of tags with the option to edit each one.
+ *
+ * @returns A JSX element containing a list of tags, each rendered by the Tag component.
  */
 export default function TagList() {
+
+    //State to store fetched tags
     const [tags, setTags] = useState([]);
 
     useEffect(() => {
+        /**
+         * fetchItems function fetches the list of tags from the backend API
+         */
         const fetchItems = async () => {
-            const apiUrl = ' http://localhost:3000/api/tags';
             try {
-                const response = await axios.get(apiUrl);
+                //Fetch all tags from backend
+                const response = await axios.get('http://localhost:3000/api/tags');
+                //Store the fetched tags
                 setTags(response.data);
             } catch (error) {
-                console.error("Error fetching tags: ", error);
+                //Log any errors occurring during fetch
+                console.error("Error fetching tags: ", error.message);
             }
         };
         fetchItems();

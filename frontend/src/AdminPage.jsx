@@ -7,9 +7,10 @@ import TagList from './TagList';
  * AdminPage component is the main page where the admin can manage word pairs and tags.
  * It displays existing word pairs in a table, and provides options to add new word pairs and tags.
  *
- * @returns JSX element representing the Admin page, with links to manage words and tags.
+ * @returns A JSX element representing the main admin page, with links to managing word pairs and tags.
  */
 export default function AdminPage() {
+    //Render the main page for admin
     return (
         <div id='admin-page'>
             <h1>Welcome Admin!</h1>

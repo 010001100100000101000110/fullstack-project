@@ -3,15 +3,15 @@ import { useState } from "react";
 
 /**
  * AdminLoginPage component allows the admin to log in to the app.
- * @returns JSX element representing the login page for the admin.
+ * @returns A JSX element representing the login page for the admin.
  */
 export default function AdminLoginPage() {
 
-    // State to hold the username entered by the admin
+    //State to hold the username entered by the admin
     const [username, setUsername] = useState("");
-    // State to hold the password entered by the admin
+    //State to hold the password entered by the admin
     const [password, setPassword] = useState("");
-    // State to control the visibility of the error message after a failed login
+    //State to control the visibility of the error message after a failed login
     const [showMessage, setShowMessage] = useState(false);
 
     /**
@@ -33,6 +33,7 @@ export default function AdminLoginPage() {
         }
     }
 
+    //Render the login page
     return (
         <div id="login-container">
             <h1>Log in</h1>
