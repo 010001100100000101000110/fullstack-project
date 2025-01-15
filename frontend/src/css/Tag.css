@@ -1,8 +1,22 @@
-.tag-list-element {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    align-items: center;
-    height: 80px;
-    border-color: black;
-    border-width: 2px;
+.tag-list-element button {
+    margin: 0 5px;
+    background-color: rgb(194, 255, 197);
+    border-radius: 3px;
+    border-width: 5px;
+    border-style: outset;
+    border-color: rgb(153, 255, 143);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.tag-list-element button:hover {
+    background-color: rgb(169, 255, 158);
+    border-style: inset;
+}
+
+.tag-name {
+    background-color: aqua;
+    padding: 10px;
+    margin: 0px;
 }

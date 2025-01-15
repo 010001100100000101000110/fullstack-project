@@ -9,11 +9,26 @@
     align-items: center;
     align-content: center;
     align-self: center;
+    margin-top: 100px;
 }
 
 #role-links button {
     margin: 0 5px;
-    width: 400px;
-    height: 210px;
+    width: 25em;
+    height: 17em;
     background-color: rgb(255, 211, 251);
+    border-radius: 20px;
+    /* border-width: 0 10px 10px 0; */
+    border-width: 10px;
+    border-style: outset;
+    border-color: rgb(255, 165, 248);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+}
+
+#role-links button:hover {
+    background-color: rgb(255, 187, 249);
+    border-style: inset;
 }

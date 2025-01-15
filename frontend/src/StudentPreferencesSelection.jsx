@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import axios from "axios";
-
+import Loading from "./Loading";
 /**
  *
  * @returns
  */
-export default function StudentOptionsSelection() {
+export default function StudentPreferencesSelection() {
     //boolean determining, if user is displayed a choice of language pairs(eng-fin, eng-swe, fin-swe)
     const [askLanguages, setAskLanguages] = useState(true);
     //boolean determining, if user is displayed a choice of which of the chosen languages do they want to practice writing
@@ -15,7 +15,7 @@ export default function StudentOptionsSelection() {
     const [askTag, setAskTag] = useState(false);
     const [tags, setTags] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-    const [selectedTag, setSelectedTag] = useState("");
+    const [selectedTag, setSelectedTag] = useState(1);
 
     //holds the two languages the user picks
     const [languages, setLanguages] = useState({ lang1: "english", lang2: "finnish" });
@@ -43,7 +43,7 @@ export default function StudentOptionsSelection() {
     }, []);
 
     if(isLoading) {
-        return <p>Loading...</p>;
+        return <Loading />;
     }
 
     const handlePreferences = () => {
@@ -118,25 +118,19 @@ export default function StudentOptionsSelection() {
     if (!askLanguages && !askWritingLanguage) {
         return (
             <div>
-                <div>
-                    <h1>Choose practice mode</h1>
-                </div>
+                <h1>Choose practice mode</h1>
 
                 <div id="mode-selection">
                     <Link to="/student/play-all">
                         <button id="play-all-btn" onClick={handlePreferences}>
-                            Play all words (2 languages)
+                            Play all words
                         </button>
                     </Link>
                     <button id="play-tag-btn" onClick={handleTagModeSelect}>
                         Play by tag
                     </button>
-
                 </div>
             </div>
         )
-
     }
-
-
 }

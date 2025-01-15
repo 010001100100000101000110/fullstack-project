@@ -12,11 +12,5 @@ nav {
     display: flex;
     justify-content: flex-start;
     max-height: 50px;
-    background-color: antiquewhite;
+    background-color: rgb(120, 255, 94);
 }
-
-/*tablet mode*/
-@media (min-width: 500px) {}
-
-/*desktop mode*/
-@media (min-width: 1024px) {}

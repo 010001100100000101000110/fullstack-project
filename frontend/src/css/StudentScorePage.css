@@ -8,18 +8,17 @@
 .scoretable {
     width: 90%;
     display: grid;
-    grid-template-columns: 50px 1fr 1fr 100px;
+    grid-template-columns: 15% 40% 50% 15%;
     align-items: center;
-    border-width: 3px;
-    border-style: solid;
     border-radius: 40px;
-    background-color: #f2a4c6;
-    align-content: center;
+    background-color: #ffcae1;
+    justify-content: start;
     text-align: center;
-    padding: 0 50px;
+    padding: 0px 100px 0px 50px;
 
-    max-height: 380px;
+    max-height: 500px;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .header,
@@ -49,8 +48,10 @@
 }
 
 #final-score {
-    background-color: magenta;
+    background-color: rgb(255, 128, 206);
     border-radius: 60px;
     color: rgb(255, 255, 255);
-    width: 50px;
+    font-size: 30px;
+    padding: 10px 20px;
+    /* width: 100px; */
 }

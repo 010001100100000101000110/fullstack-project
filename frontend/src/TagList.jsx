@@ -23,12 +23,12 @@ export default function TagList() {
 
 
     return (
-        <ul className="taglist">
+        <div className="taglist">
+            <h3>Name</h3>
+            <h3></h3>
             {tags.map((tag) => (
-                <li key={tag.id}>
-                    <Tag tag={tag} />
-                </li>
+                <Tag key={tag.id} tag={tag} />
             ))}
-        </ul>
+        </div>
     )
 }

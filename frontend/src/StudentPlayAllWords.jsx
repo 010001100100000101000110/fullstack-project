@@ -2,6 +2,7 @@ import './css/StudentPlayAllWords.css'
 import { useState, useEffect } from "react";
 import axios from "axios";
 import StudentQuiz from './StudentQuiz';
+import Loading from "./Loading";
 /**
 * Practice mode where the user plays all words without filtering.
 * User can pick 2 out of 3 languages and which one of them they want to practice writing.
@@ -31,7 +32,7 @@ export default function StudentPlayAllWords() {
     }, []);
 
     if (isLoading) {
-        return <p>Loading...</p>;
+        return <Loading />;
     }
 
     return <StudentQuiz wordlist={wordpairs} />

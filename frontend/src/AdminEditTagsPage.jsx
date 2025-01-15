@@ -1,18 +1,17 @@
-//page which allows the admin to edit tags
 import './css/AdminEditWordsPage.css';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useParams} from 'react-router-dom';
 import { useState, useEffect } from "react";
 import axios from "axios";
-
+import Loading from "./Loading";
 
 export default function AdminEditWordsPage() {
     const { id } = useParams();
     const [tag, setTag] = useState(null);
     const [newTagName, setNewTagName] = useState(null);
     const [tagDeleted, setTagDeleted] = useState(false);
-    const [showSaveMessage, setShowSaveMessage] = useState(false);
-    const navigate = useNavigate();
+    const [showMessage, setShowMessage] = useState(false);
 
+    const [saved, setSaved] = useState(false);
     useEffect(() => {
         const fetchTag = async () => {
             try {
@@ -22,6 +21,8 @@ export default function AdminEditWordsPage() {
                 console.log(response.data);
                 setTag(response.data);
                 setNewTagName(response.data.name);
+
+
             } catch (error) {
                 console.error("Error getting data: ", error);
             }
@@ -29,40 +30,51 @@ export default function AdminEditWordsPage() {
         fetchTag();
     }, [id]);
 
-    //**
-    //
-    // */
+
     const handleSave = async () => {
-        try {
-            console.log("ID: ", id, "TAG: ", tag)
-            setShowSaveMessage(true);
-            const apiUrl = `http://localhost:3000/api/tags/${id}`;
-            const response = await axios.put(apiUrl, {name: newTagName});
+        if (tag) {
+            try {
+                console.log("ID: ", id, "TAG: ", tag)
+
+                const apiUrl = `http://localhost:3000/api/tags/${id}`;
+                await axios.put(apiUrl, { name: newTagName });
+
+                setSaved(true)
+                setTimeout(() => {
+                    window.location.href = "/admin";
+                }, 1000);
+                setTimeout(() => {
+                    setSaved(false);
+                }, 5000);
+            } catch (error) {
+                console.error("Error inserting data: ", error);
+            }
+        } else {
+            setShowMessage(true);
+            //Hide the success message after 3 seconds
             setTimeout(() => {
-                console.log("RESPONSE: ", response);
-                setShowSaveMessage(false);
+                setShowMessage(false);
             }, 3000);
-        } catch (error) {
-            console.error("Error inserting data: ", error);
         }
     }
-
+    if (saved) {
+        return (
+            <h2>Tag saved!</h2>
+        )
+    }
     if (!tag) {
-        return <h2>Loading...</h2>
+        return <Loading />
     }
 
-    //**
-    //
-    // */
+
     const handleDelete = async () => {
         try {
             setTagDeleted(true);
             const apiUrl = `http://localhost:3000/api/tags/${id}`;
-            const response = await axios.delete(apiUrl);
+            await axios.delete(apiUrl);
             setTimeout(() => {
-                console.log("RESPONSE: ", response);
                 setTagDeleted(false);
-                navigate('/admin', { replace: true });
+                window.location.replace('/admin');
             }, 2000);
         } catch (error) {
             console.error(error);
@@ -94,15 +106,9 @@ export default function AdminEditWordsPage() {
                     Save
                 </button>
 
-                <Link to="/admin">
-                    <button>
-                        Go back
-                    </button>
-                </Link>
-
                 <button className="delete-btn" onClick={handleDelete}></button>
 
-                {showSaveMessage && <p>Tag saved!</p>}
+                {showMessage && <p>Tag name required.</p>}
             </div>
         </div>
     )

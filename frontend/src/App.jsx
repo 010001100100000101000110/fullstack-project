@@ -9,9 +9,11 @@ import AdminAddWordsPage from "./AdminAddWordsPage";
 import AdminEditWordsPage from "./AdminEditWordsPage";
 import AdminAddTagsPage from "./AdminAddTagsPage";
 import AdminEditTagsPage from "./AdminEditTagsPage";
-import StudentMainPage from "./StudentMainPage";
+// import StudentMainPage from "./StudentMainPage";
 import StudentPlayAllWords from "./StudentPlayAllWords";
 import StudentPlayFilteredWords from "./StudentPlayFilteredWords";
+import StudentPreferencesSelection from "./StudentPreferencesSelection";
+import BackButton from "./BackButton";
 /**
  *
  * @returns
@@ -22,6 +24,7 @@ function App() {
       <BrowserRouter>
         {NavBar()}
         <div className="contents">
+          <BackButton />
           <Routes>
             <Route path="/" element={<FrontPage />} />
             <Route path="/login" element={<AdminLoginPage />} />
@@ -31,7 +34,7 @@ function App() {
             <Route path="/admin/add-tag" element={<AdminAddTagsPage />} />
             <Route path="/admin/edit-tag/:id" element={<AdminEditTagsPage />} />
 
-            <Route path="/student" element={<StudentMainPage />} />
+            <Route path="/student" element={<StudentPreferencesSelection />} />
             <Route path="/student/play-all" element={<StudentPlayAllWords />} />
             <Route path="/student/play-filtered" element={<StudentPlayFilteredWords />} />
           </Routes>

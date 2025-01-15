@@ -1,10 +1,6 @@
 import './css/StudentScorePage.css';
 import PropTypes from 'prop-types';
-/**
- *
- * @param {*} param0
- * @returns A page displaying users score
- */
+
 export default function StudentScorePage({answers, score, resetFunc}) {
 
     const handleRetry = () => {
@@ -18,7 +14,7 @@ export default function StudentScorePage({answers, score, resetFunc}) {
             <ul className="scoretable">
 
                 <div className='header'>
-                    <p>n</p>
+                    <p>Q</p>
                     <p>Given word</p>
                     <p>Your answer</p>
                     <p>Points</p>
@@ -28,8 +24,13 @@ export default function StudentScorePage({answers, score, resetFunc}) {
                     <div key={i} className='row'>
                         <p>{i + 1}</p>
                         <p>{answer.q}</p>
-                        <p>{answer.a}</p>
-                        <p className={answer.correct ? "ans-correct" : "ans-incorrect"}>{answer.correct ? "1" : "0"}</p>
+                        <p>
+                            <span style={{ textDecoration: 'line-through' }}>
+                                {answer.a}
+                            </span>
+                            {` ${answer.correctA}`}
+                        </p>
+                        <p className={answer.correct  ? "ans-correct" : "ans-incorrect"}>{answer.correct ? "1" : "0"}</p>
                     </div>
                 ))}
             </ul>

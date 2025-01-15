@@ -2,7 +2,11 @@ import './css/FrontPage.css';
 import { Link } from 'react-router-dom';
 
 /**
- * page which allows the user to choose a role in the app
+ * FrontPage component allows the user to select a role (Admin or Student) in the app.
+ * The page provides two buttons linking to the login page for the Admin role
+ * and a student page for the Student role.
+ *
+ * @returns JSX element representing the front page with role selection options.
  */
 export default function FrontPage() {
     return (
@@ -10,26 +14,29 @@ export default function FrontPage() {
             <h1>Choose your role:</h1>
 
             <div id="role-links">
+                {/* Link to the login page for the Admin role */}
                 <Link to="/login" className="role-link">
                     <button id="choose-admin-btn">
                         <h2>Admin</h2>
-                        <h3>Stuff:</h3>
-                        <ul>
-                            <li>add new wordpairs</li>
-                            <li>edit existing wordpairs</li>
-                            <li>delete existing wordpairs</li>
-                        </ul>
+                        {/* List of features available to the Admin */}
+                        <div>
+                            <p>Create learning material!</p>
+                            <p>Add, edit and delete word pairs</p>
+                            <p>Add, edit and delete tags</p>
+                        </div>
                     </button>
                 </Link>
+                {/* Link to the student page for the Student role */}
                 <Link to="/student" className="role-link">
                     <button id="choose-student-btn">
                         <h2>Student</h2>
-                        <h3>Stuff:</h3>
-                        <ul>
-                            <li>practice words</li>
-                            <li>three languages</li>
-                            <li>choose the language to write</li>
-                        </ul>
+                        {/* List of features available to the Student */}
+                        <div>
+                            <p>Practice words</p>
+                            <p>Practice words by tag</p>
+                            <p>Three languages!</p>
+                            <p>Choose the language you want to write</p>
+                        </div>
                     </button>
                 </Link>
             </div>

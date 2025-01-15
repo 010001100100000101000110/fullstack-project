@@ -2,6 +2,7 @@ import './css/StudentPlayAllWords.css'
 import { useState, useEffect } from "react";
 import StudentScorePage from './StudentScorePage';
 import PropTypes from 'prop-types';
+import Loading from "./Loading";
 /**
 * Practice mode
 * @param wordlist the list of words the user will practice. Could either be all words from database or words filtered by tag
@@ -35,10 +36,8 @@ export default function StudentQuiz({ wordlist }) {
             const storedPreference = localStorage.getItem('preferences');
             if (storedPreference) {
                 setPreferences(JSON.parse(storedPreference));
-                console.log("PREFERENCES: ", JSON.parse(storedPreference))
             }
             setWordpairs(wordlist);
-            console.log("WORDLIST", wordlist);
             getRandomPair(wordlist);
         } catch (err) {
             console.error("error getting preferences: ", err);
@@ -48,7 +47,7 @@ export default function StudentQuiz({ wordlist }) {
 
     }, []);
     if (isLoading || !currentWordpair) {
-        return <p>Loading...</p>;
+        return <Loading />;
     }
 
 
@@ -57,12 +56,9 @@ export default function StudentQuiz({ wordlist }) {
     * @param array wordpairs array
     */
     function getRandomPair(array) {
-        console.log("GETTING RANDOM PAIR");
         if (array.length === 0) return;
         const randNum = Math.floor(Math.random() * array.length);
-        console.log(randNum);
         setCurrentWordpair(array[randNum]);
-        console.log("CURRENT WORDPAIR: ", currentWordpair);
         setWordpairs((prev) =>
             prev.filter((_, index) => index !== randNum)
         );
@@ -70,7 +66,7 @@ export default function StudentQuiz({ wordlist }) {
 
     /**
     * Function executed when user submits an answer.
-    * Logs the given word, written word, and if the answer was correct or not.
+    * Stores the given word, written word, and if the answer was correct or not.
     */
     function handleAnswer() {
         if (!currentWordpair) return;
@@ -87,6 +83,7 @@ export default function StudentQuiz({ wordlist }) {
             {
                 q: getPromptWord(),
                 a: answer,
+                correctA: getCorrectAnswer(),
                 correct: isCorrect
             }
         ]);
@@ -102,6 +99,10 @@ export default function StudentQuiz({ wordlist }) {
         }, 2000);
     }
 
+    /**
+     * The resetPage function resets the quiz's properties for the next practicing try
+     * and redirects the user back to the student's main page.
+     */
     const resetPage = () => {
         setScore(0);
         setCurrentWordpair(null);
@@ -121,6 +122,16 @@ export default function StudentQuiz({ wordlist }) {
             return currentWordpair[preferences.languages.lang2];
         }
         return currentWordpair[preferences.languages.lang1];
+    }
+    /**
+     *
+     * @returns the word which is the correct answer to the given prompt
+     */
+    function getCorrectAnswer() {
+        if (preferences.writingLanguage === preferences.languages.lang1) {
+            return currentWordpair[preferences.languages.lang1];
+        }
+        return currentWordpair[preferences.languages.lang2];
     }
 
     //show score after playthrough

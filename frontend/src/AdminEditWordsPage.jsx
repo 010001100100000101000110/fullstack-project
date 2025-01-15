@@ -1,34 +1,49 @@
 //page which allows the admin to edit wordpairs
 import './css/AdminEditWordsPage.css';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Loading from "./Loading";
 
-
-//**
-//
-//
-//
-// */
 export default function AdminEditWordsPage() {
+    //Get the word pair's ID from URL parameters
     const { id } = useParams();
+    //State to hold the word pair object
     const [wordpair, setWordpair] = useState(null);
+    //States for managing word pair properties
     const [englishWord, setEnglishWord] = useState("");
     const [finnishWord, setFinnishWord] = useState("");
     const [swedishWord, setSwedishWord] = useState("");
-    const [wordsDeleted, setWordsDeleted] = useState(false);
-    const [showSaveMessage, setShowSaveMessage] = useState(false);
-    const navigate = useNavigate();
+    //State for tags fetched from backend
+    const [allTags, setAllTags] = useState("");
+    const [oldTags, setOldTags] = useState("");
+    const [wordpairDeleted, setWordpairDeleted] = useState(false);
+    const [showMessage, setShowMessage] = useState(false);
+    //Selected tags for the word pair
+    const [selectedTags, setSelectedTags] = useState("");
+    const [saved, setSaved] = useState(false);
 
     useEffect(() => {
         const fetchWordpair = async () => {
             try {
-                const apiUrl = `http://localhost:3000/api/wordpairs/${id}`;
-                const response = await axios.get(apiUrl);
-                setWordpair(response.data);
-                setEnglishWord(response.data.english);
-                setFinnishWord(response.data.finnish);
-                setSwedishWord(response.data.swedish);
+                // Fetch the correct word pair by id
+                const words = await axios.get(`http://localhost:3000/api/wordpairs/${id}`);
+                // Fetch the list of tags from the backend API
+                const tags = await axios.get(`http://localhost:3000/api/tags`);
+
+                setWordpair(words.data);
+                setEnglishWord(words.data.english);
+                setFinnishWord(words.data.finnish);
+                setSwedishWord(words.data.swedish);
+
+                //Store the fetched tags
+                setAllTags(tags.data);
+
+
+                if (words.data.tags) {
+                    setOldTags(words.data.tags);
+                    setSelectedTags(words.data.tags.split(','));
+                }
             } catch (error) {
                 console.error("Error getting data: ", error);
             }
@@ -40,46 +55,77 @@ export default function AdminEditWordsPage() {
     //
     // */
     const handleSave = async () => {
-        try {
-            setShowSaveMessage(true);
-            const apiUrl = `http://localhost:3000/api/wordpairs/${id}`;
-            const wordpair = { english: englishWord, finnish: finnishWord, swedish: swedishWord }
-            const response = await axios.put(apiUrl, wordpair);
+        //check if all language inputs are filled
+        const validInputs = englishWord && swedishWord && finnishWord;
+        if (validInputs) {
+            try {
+                const wordpair = {
+                    english: englishWord,
+                    finnish: finnishWord,
+                    swedish: swedishWord,
+                    tags: selectedTags.toString()
+                }
+                console.log(wordpair);
+                await axios.put(`http://localhost:3000/api/wordpairs/${id}`, wordpair);
+                setSaved(true)
+                setTimeout(() => {
+                    window.location.href = "/admin";
+                }, 1000);
+                setTimeout(() => {
+                    setSaved(false);
+                }, 5000);
+            } catch (error) {
+                console.error("Error inserting data: ", error);
+            }
+        } else {
+            setShowMessage(true);
             setTimeout(() => {
-                console.log("RESPONSE: ", response);
-                setShowSaveMessage(false);
+                setShowMessage(false);
             }, 3000);
-        } catch (error) {
-            console.error("Error inserting data: ", error);
         }
+
     }
 
-    if(!wordpair) {
-        return <h2>Loading...</h2>
-    }
 
-    //**
-    //
-    // */
+    /**
+    * handleCheckboxChange handles the selection and deselection of tags
+    * by updating the selectedTags state array.
+    */
+    const handleCheckboxChange = (tagId) => {
+        console.log(selectedTags);
+        setSelectedTags((prevSelected) =>
+            prevSelected.includes(tagId.toString()) ?
+                prevSelected.filter((id) => id !== tagId.toString())
+                : [...prevSelected, tagId.toString()]
+        );
+    };
+
+
     const handleDelete = async () => {
         try {
-            setWordsDeleted(true);
-            const apiUrl = `http://localhost:3000/api/wordpairs/${id}`;
-            const response = await axios.delete(apiUrl);
+            setWordpairDeleted(true);
+            await axios.delete(`http://localhost:3000/api/wordpairs/${id}`);
             setTimeout(() => {
-                console.log("RESPONSE: ", response);
-                setWordsDeleted(false);
-                navigate('/admin', { replace: true });
+                setWordpairDeleted(false);
+                window.location.replace('/admin')
             }, 2000);
         } catch (error) {
             console.error(error);
         }
     }
+    if (saved) {
+        return (
+            <h2>Word pair saved!</h2>
+        )
+    }
 
-    if (wordsDeleted) {
+    if (wordpairDeleted) {
         return (
             <p>Wordpair deleted.</p>
         )
+    }
+    if (!wordpair) {
+        return <Loading />
     }
     return (
         <div>
@@ -105,7 +151,22 @@ export default function AdminEditWordsPage() {
                     defaultValue={wordpair.swedish}
                     onChange={(event) => setSwedishWord(event.target.value)}
                 />
-
+                {/* Tag selection section */}
+                <h3>Choose tags (optional)</h3>
+                <div>
+                    {/* Display checkboxes for all available tags */}
+                    {allTags.map((tag, index) => (
+                        <div key={index}>
+                            {tag.name}
+                            <input
+                                type="checkbox"
+                                onChange={() => handleCheckboxChange(tag.id)}
+                                defaultChecked={oldTags.includes(tag.id)}
+                            />
+                        </div>
+                    ))}
+                </div>
+                {/* Button to save the updated word pair to the database */}
                 <button
                     className="save-words-btn"
                     onClick={handleSave}
@@ -113,15 +174,10 @@ export default function AdminEditWordsPage() {
                     Save
                 </button>
 
-                <Link to="/admin">
-                    <button id="choose-student-btn">
-                        Go back
-                    </button>
-                </Link>
-
                 <button className="delete-btn" onClick={handleDelete}></button>
 
-                {showSaveMessage && <p>Wordpair saved!</p>}
+                {/* Show message when attempting to save empty fields */}
+                {showMessage && <p>All language fields are required</p>}
             </div>
         </div>
     )

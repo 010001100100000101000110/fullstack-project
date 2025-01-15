@@ -1,42 +1,40 @@
-.wordpair {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-    align-items: center;
-    border-radius: 30px;
-    height: 80px;
-    border-top: 2px;
-    border-bottom: 2px;
-}
-
-.wordpair>* {
-    background-color: transparent;
-    border: 1px solid rgb(83, 64, 41);
-    text-align: center;
-    height: 60px;
-    align-content: center;
-    border-radius: 0px;
-}
-
-.wordpair> :first-child {
-    border-left: none;
-}
-
-.wordpair> :last-child {
-    border-right: none;
+.english-word,
+.finnish-word,
+.swedish-word,
+.wordpair-tag {
+    padding: 10px;
+    margin: 0px;
 }
 
 .english-word {
-    background-color: rgb(189, 161, 255);
+    background-color: #ff000098;
 }
 
 .finnish-word {
-    background-color: rgb(157, 227, 255);
+    background-color: #00e1ff;
 }
 
 .swedish-word {
-    background-color: rgb(250, 255, 175);
+    background-color: #eeff00;
+}
+
+.wordpair-tag {
+    background-color: #ff7af8;
+}
+
+.edit-word-btn {
+    margin: 0 5px;
+    background-color: rgb(194, 255, 197);
+    border-radius: 3px;
+    border-width: 5px;
+    border-style: outset;
+    border-color: rgb(153, 255, 143);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .edit-word-btn:hover {
-    background-color: rgb(165, 42, 155);
+    background-color: rgb(169, 255, 158);
+    border-style: inset;
 }

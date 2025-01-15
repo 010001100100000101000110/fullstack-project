@@ -1,5 +1,26 @@
 .taglist {
-    background-color: aquamarine;
-    padding: 50px;
-    list-style-type: none;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.taglist {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    max-height: 600px;
+    overflow-y: auto;
+    background-color: rgb(184, 184, 255);
+    padding: 20px;
+    margin: 0px;
+}
+
+.taglist div {
+    display: contents;
+}
+
+.taglist h3 {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    text-decoration-line: underline;
 }
