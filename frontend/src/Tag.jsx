@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
  * Tag component displays a tag's name with an edit button that redirects to an edit page.
  *
  * @param {Object} tag - The tag object containing details of the tag.
- *
  * @returns A JSX element containing the tag name and an edit button.
  */
 export default function Tag({tag}) {

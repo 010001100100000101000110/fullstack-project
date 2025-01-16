@@ -8,7 +8,6 @@ import axios from "axios";
  * It also shows the associated tags and an editing button that redirects to an edit page
  *
  * @param {Object} pair - The word pair object containing details of the word pair.
- *
  * @returns A JSX Component containing the word pair details and an edit button.
  */
 export default function Wordpair({pair}) {
