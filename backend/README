@@ -1,2 +1,2 @@
 I asked simple instructions from ChatGPT with generating a HTML docs for the whole project with one root command.
-
+With it's help i created the jsdoc.json file and implemented a script to the root's package.json file
