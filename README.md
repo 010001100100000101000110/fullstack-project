@@ -1,9 +1,9 @@
-#Fullstack project (WIP)
+# Fullstack project (WIP)
 
-##Introduction
+## Introduction
 This is a course project for school. The topic given was a foreign language word practicing application for kids.
 
-##Features
+## Features
 The application has two user roles, admin and student.
 There are three languages supported, English, Finnish and Swedish.
 
@@ -14,25 +14,28 @@ The admin has the ability to determine tags for the word pairs (e.g., Eng: dog, 
 The student has two practice modes to choose from: either practice all words, or choose a tag and practice the filtered words.
 The student can choose which two of the three languages they want to practice, and choose the language they want to practice writing.
 
-##Database
-The word pair database holds word pair objects in the format of {english: "apple", finnish: "omena", swedish: "äppel", tags: "4,5"}
-
-
-##Screenshots:
+## Screenshots:
 Screenshots from application here
 
-##Cloud
+## Cloud
 The project is partly on the cloud, but due to some content security policy and blocked cross origin requests, it can't work correctly.
 https://docker-project-wjpz.onrender.com/
 
-##Screencast
+## Screencast
 Link to video here
 
-##How to use
+## How to use
 
 1. Clone the repository.
 2. In a command line navigate to the root of the repository and give the command "npm start".
 3. You can then open your localhost port on your browser (should be http://localhost:5173/).
 
+## Database
+The word pair database holds word pair objects in the format of {id: 1, english: "apple", finnish: "omena", swedish: "äppel", tags: "4,5"}.
+The 'tags' is a string containing comma separated tag IDs.
+
+The tag database holds tag objects in the format of {id: 4, name: "Food"}.
+
+The IDs for both databases are auto incremented.
 
 Vee Jalonen
