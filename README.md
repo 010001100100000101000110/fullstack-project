@@ -15,7 +15,10 @@ The student has two practice modes to choose from: either practice all words, or
 The student can choose which two of the three languages they want to practice, and choose the language they want to practice writing.  
 
 ## Screenshots:
-Screenshots from application here
+![Alt text](/screenshots/AdminAddWordsPage.PNG?raw=true "Word pair adding page")  
+![Alt text](/screenshots/AdminFrontPage.PNG?raw=true "Admin front page")  
+![Alt text](/screenshots/StudentQuiz.PNG?raw=true "Practicing page")  
+![Alt text](/screenshots/StudentScorePage.PNG?raw=true "Score page")  
 
 ## Cloud
 The project is partly on the cloud, but due to some content security policy and blocked cross origin requests, it can't work correctly.  
@@ -28,12 +31,6 @@ Link to video here
 
 1. Clone the repository.
 2. In a command line navigate to the root of the repository and give the command "npm start".
-3. You can then open your localhost port on your browser (should be http://localhost:5173/).
-
-## Database
-The word pair database holds word pair objects in the format of {id: 1, english: "apple", finnish: "omena", swedish: "äppel", tags: "4,5"}.  
-The 'tags' is a string containing comma separated tag IDs.  
-The tag database holds tag objects in the format of {id: 4, name: "Food"}.  
-The IDs for both databases are auto incremented.  
+3. You can then open your localhost port on your browser (should be http://localhost:5173/). 
 
 Vee Jalonen
