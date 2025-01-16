@@ -1,7 +1,7 @@
 # Fullstack project (WIP)
 
 ## Introduction
-This is a course project for school. The topic given was a foreign language word practicing application for kids.  
+This is a course project for school. The topic given was a foreign language word practicing application for kids with the function to manage and practice words in different languages.
 
 ## Features
 The application has two user roles, admin and student.  
