@@ -18,7 +18,7 @@ The student can choose which two of the three languages they want to practice, a
 Screenshots from application here
 
 ## Cloud
-The project is partly on the cloud, but due to some content security policy and blocked cross origin requests, it can't work correctly.
+The project is partly on the cloud, but due to some content security policy and blocked cross origin requests, it can't work correctly.  
 https://docker-project-wjpz.onrender.com/
 
 ## Screencast
