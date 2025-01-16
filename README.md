@@ -1,59 +1,37 @@
-Copied from https://meakaakka.medium.com/a-beginners-guide-to-writing-a-kickass-readme-7ac01da88ab3
+#Fullstack project (WIP)
 
-Project title
+##Introduction
+This is a course project for school. The topic given was a foreign language word practicing application for kids.
 
-A little info about your project and/ or overview that explains what the project is about.
-Motivation
+##Features
+The application has two user roles, admin and student.
+There are three languages supported, English, Finnish and Swedish.
 
-A short description of the motivation behind the creation and maintenance of the project. This should explain why the project exists.
-Build status
+The admin can manage word pairs and tags by adding, editing and removing them. Wordpair can be e.g: Eng: "cat", Fin: "kissa", Swe: "katt", and a tag: "Animal"
+The student can practice the word pairs the admin created.
 
-Build status of continus integration i.e. travis, appveyor etc. Ex. -
+The admin has the ability to determine tags for the word pairs (e.g., Eng: dog, Fin: koira, Swe: hund, Tags: animal).
+The student has two practice modes to choose from: either practice all words, or choose a tag and practice the filtered words.
+The student can choose which two of the three languages they want to practice, and choose the language they want to practice writing.
 
-Build Status Windows Build Status
-Code style
+##Database
+The word pair database holds word pair objects in the format of {english: }
 
-If you're using any code style like xo, standard etc. That will help others while contributing to your project. Ex. -
+##Screenshots:
+Screenshots from application here
 
-js-standard-style
-Screenshots
+##Cloud
+The project is partly on the cloud, but due to some content security policy and blocked cross origin requests, it can't work correctly.
+https://docker-project-wjpz.onrender.com/
 
-Include logo/demo screenshot etc.
-Tech/framework used
+##Screencast
+Link to video here
 
-Ex. -
+##How to use
 
-Built with
+1. Clone the repository.
+2. In a command line navigate to the root of the repository and give the command "npm start".
+3. You can then open your localhost port on your browser (should be http://localhost:5173/).
 
-    Electron
 
-Features
-
-What makes your project stand out?
-Code Example
-
-Show what the library does as concisely as possible, developers should be able to figure out how your project solves their problem by looking at the code example. Make sure the API you are showing off is obvious, and that your code is short and concise.
-Installation
-
-Provide step by step series of examples and explanations about how to get a development env running.
-API Reference
-
-Depending on the size of the project, if it is small and simple enough the reference docs can be added to the README. For medium size to larger projects it is important to at least provide a link to where the API reference docs live.
-Tests
-
-Describe and show how to run the tests with code examples.
-How to use?
-
-If people like your project they’ll want to learn how they can use it. To do so include step by step guide to use your project.
-Contribute
-
-Let people know how they can contribute into your project. A contributing guideline will be a big plus.
-Credits
-
-Give proper credits. This could be a link to any repo which inspired you to build this project, any blogposts or links to people who contrbuted in this project.
-Anything else that seems useful
-License
-
-A short snippet describing the license (MIT, Apache etc)
-
-MIT © Yourname
+Vee Jalonen
