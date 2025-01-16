@@ -11,6 +11,7 @@ import AdminTagPage from './AdminTagPage';
  * @returns A JSX element representing the page with a word pair editing component, saving or deletion message or a loading component.
  */
 export default function AdminEditTagsPage() {
+
     //Get the tag ID from the URL parameters
     const { id } = useParams();
     //State to store the fetched tag object

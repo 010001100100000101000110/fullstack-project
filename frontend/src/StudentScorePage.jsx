@@ -19,6 +19,7 @@ export default function StudentScorePage({answers, score, resetFunc}) {
         score = null;
         resetFunc();
     }
+
     //Render the score page
     return (
         <div id="score-page">

@@ -8,14 +8,14 @@ import "./css/AdminTagPage.css"
  * AdminTagPage component allows the admin to add or edit a tag.
  * It provides a component to input the tag name and buttons to save or delete the tag.
  *
- * @param {string|number} id - The ID of the tag being edited. If not provided, it's an "Add Tag" form.
+ * @param {(string|number)} id - The ID of the tag being edited. If not provided, it's an "Add Tag" form.
  * @param {string} existingTagName - The existing tag name when editing a tag.
  * @param {Function} onSave - The function to call when saving the tag.
  * @param {Function} onDelete - The function to call when deleting the tag.
- *
  * @returns A JSX element representing a page to add or edit a tag.
  */
 export default function AdminTagPage({ id, existingTagName, onSave, onDelete }) {
+
     //State for the tag name input
     const [tagName, setTagName] = useState(existingTagName || "");
     //State to show an error message when no name is provided

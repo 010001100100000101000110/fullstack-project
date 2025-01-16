@@ -3,6 +3,7 @@ const db = new sqlite3.Database(':memory:');
 
 
 const dbFunctions = {
+
     /**
      * Initializes the word pair database by creating the 'Wordpairs' table if it doesn't exist
      * and inserting default word pairs if the table is empty.
@@ -30,6 +31,7 @@ const dbFunctions = {
                     }
                 });
             });
+
             // Insert default word pairs if the table is empty
             if (rowCount === 0) {
                 await this.insert("red", "punainen", "röd", "1");
@@ -131,6 +133,7 @@ const dbFunctions = {
             throw new Error(`Unable to update word pair by id ${id}`);
         }
     },
+
     /**
      * Retrieves all word pairs from the 'Wordpairs' table.
      * @returns {Promise<Array>} Resolves with an array of all word pairs in the database.
@@ -198,6 +201,7 @@ const dbFunctions = {
         }
 
     },
+
     /**
      * Closes the word pair database connection.
      */

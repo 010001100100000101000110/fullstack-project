@@ -1,0 +1,11 @@
+{
+    "source": {
+        "include": [
+            "./backend/databases",
+            "./frontend/src"
+        ]
+    },
+    "opts": {
+        "destination": "./docs"
+    }
+}

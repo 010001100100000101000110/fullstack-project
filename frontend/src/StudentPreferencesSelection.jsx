@@ -12,6 +12,7 @@ import './css/StudentPreferencesSelection.css'
  * @returns The JSX elements for displaying the preferences selection.
  */
 export default function StudentPreferencesSelection() {
+
     //States to track the different steps of the user preference selection process
     //Step 1: Ask for language pair
     const [askLanguages, setAskLanguages] = useState(true);
@@ -153,7 +154,7 @@ export default function StudentPreferencesSelection() {
         )
     }
 
-    //if language preferences are set, ask user which practice mode they want
+    //If language preferences are set, ask user which practice mode they want
     if (!askLanguages && !askWritingLanguage) {
         return (
             <div>

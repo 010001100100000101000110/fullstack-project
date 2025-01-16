@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import AdminWordPairPage from "./AdminWordPairPage";
 import Loading from "./Loading";
+
 /**
  * AdminEditWordsPage component fetches the word pair details and allows the admin to edit or delete the word pair.
  * Provides actions to save or delete the word pair.
@@ -10,6 +11,7 @@ import Loading from "./Loading";
  * @returns A JSX element representing the page with a word pair editing component, saving or deletion message or a loading component.
  */
 export default function AdminEditWordsPage() {
+
     //Get the word pair ID from the URL parameters
     const { id } = useParams();
     //State to store the fetched word pair object
@@ -97,10 +99,12 @@ export default function AdminEditWordsPage() {
     if (isLoading) {
         return <Loading />;
     }
+
     //Show saving message if word pair has been saved
     if (saved) {
         return <h2>Word pair saved!</h2>;
     }
+
     //Show deletion message if word pair has been deleted
     if (wordpairDeleted) {
         return <p>Word pair deleted.</p>;

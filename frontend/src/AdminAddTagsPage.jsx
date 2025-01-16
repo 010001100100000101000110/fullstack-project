@@ -1,5 +1,6 @@
 import { useState } from "react";
 import AdminTagPage from './AdminTagPage';
+
 /**
  * AdminAddTagsPage component renders a page to add a new tag.
  * It displays a "Tag saved!" message when a tag is saved.
@@ -7,6 +8,7 @@ import AdminTagPage from './AdminTagPage';
  * @returns A JSX element representing the page that either shows the AdminTagPage component to add a tag or a success message after saving the tag.
  */
 export default function AdminAddTagsPage() {
+
     // State to track if a tag has been saved.
     const [saved, setSaved] = useState(false);
 

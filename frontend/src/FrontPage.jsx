@@ -6,9 +6,10 @@ import { Link } from 'react-router-dom';
  * The page provides two buttons linking to the login page for the Admin role
  * and a student page for the Student role.
  *
- * @returns {JSX element} The front page with role selection options.
+ * @returns A JSX element representing the front page with role selection options.
  */
 export default function FrontPage() {
+
     //Render the front page
     return (
         <div id="front-page">

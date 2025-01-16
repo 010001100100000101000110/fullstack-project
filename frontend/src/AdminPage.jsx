@@ -10,6 +10,7 @@ import TagList from './TagList';
  * @returns A JSX element representing the main admin page, with links to managing word pairs and tags.
  */
 export default function AdminPage() {
+
     //Render the main page for admin
     return (
         <div id='admin-page'>

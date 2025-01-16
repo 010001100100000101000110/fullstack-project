@@ -11,6 +11,7 @@ import axios from "axios";
  * @returns A JSX Component containing the word pair details and an edit button.
  */
 export default function Wordpair({pair}) {
+
     //State to hold the word pair's tags
     const [tags, setTags] = useState(null);
 

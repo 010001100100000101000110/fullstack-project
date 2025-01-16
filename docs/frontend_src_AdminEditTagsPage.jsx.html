@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: frontend/src/AdminEditTagsPage.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: frontend/src/AdminEditTagsPage.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useParams } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import axios from "axios";
+import Loading from "./Loading";
+import AdminTagPage from './AdminTagPage';
+
+/**
+ * AdminEditTagsPage component fetches the tag details and allows the admin to edit or delete the tag.
+ * Provides actions to save or delete the tag.
+ *
+ * @returns A JSX element representing the page with a word pair editing component, saving or deletion message or a loading component.
+ */
+export default function AdminEditTagsPage() {
+
+    //Get the tag ID from the URL parameters
+    const { id } = useParams();
+    //State to store the fetched tag object
+    const [tag, setTag] = useState(null);
+    //State to track if the tag is deleted
+    const [tagDeleted, setTagDeleted] = useState(false);
+    //State to track if a tag has been saved
+    const [saved, setSaved] = useState(false);
+    //State to track if data is still being fetched
+    const [isLoading, setIsLoading] = useState(true);
+
+
+    useEffect(() => {
+        /**
+         * fetchTag function fetches tag from the backend API based on the tag ID.
+         */
+        const fetchTag = async () => {
+            try {
+                //Set loading state to show loading component while data is being fetched
+                setIsLoading(true);
+                //Fetch tag by given ID
+                const response = await axios.get(`http://localhost:3000/api/tags/${id}`);
+                //Store fetched tag to 'tag'-state
+                setTag(response.data);
+            } catch (error) {
+                //Log any errors occurring during fetch
+                console.error("Error fetching tag data: ", error.message);
+            } finally {
+                //Set loading state to hide loading component
+                setIsLoading(false);
+            }
+        };
+        fetchTag();
+    }, [id]);
+
+    /**
+     * handleSave function is triggered when a tag is saved. Shows a brief "Tag saved!" message
+     */
+    const handleSave = () => {
+        setSaved(true);
+        setTag("");
+        //setTimeout, so user can briefly see "Tag saved!" message
+        setTimeout(() => {
+            //Redirect to admin page after saving the tag
+            window.location.href = "/admin";
+        }, 1500);
+        //Another setTimeout to switch saving status later while page redirects
+        setTimeout(() => {
+            setSaved(false);
+        }, 4000);
+    };
+
+    /**
+     * handleDelete function deletes the tag and redirects to the admin page after deletion.
+     */
+    const handleDelete = async () => {
+        try {
+            //Set tagDeleted state to show deletion status to user
+            setTagDeleted(true);
+            //DELETE request to remove the tag
+            await axios.delete(`http://localhost:3000/api/tags/${id}`);
+            //setTimeout, so user can briefly see "Tag deleted." message
+            setTimeout(() => {
+                //Redirect to admin page after deletion
+                window.location.replace("/admin");
+            }, 1000);
+            //Another setTimeout to switch deletion status later while page redirects
+            setTimeout(() => {
+                setTagDeleted(false);
+            }, 4000);
+        } catch (error) {
+            //Log any errors occurring during deletion
+            console.error("Error deleting tag: ", error.message);
+        }
+    }
+
+    //Show loading page if data is still being fetched
+    if (isLoading) {
+        return &lt;Loading />;
+    }
+
+    //Show deletion message if tag has been deleted
+    if (tagDeleted) {
+        return &lt;p>Tag deleted.&lt;/p>;
+    }
+    //Show saving message if tag has been saved
+    if (saved) {
+        return &lt;h2>Tag saved!&lt;/h2>
+    }
+
+    //Render the tag editing page
+    return &lt;AdminTagPage
+        id={tag.id}
+        existingTagName={tag.name}
+        onSave={handleSave}
+        onDelete={handleDelete}
+    />;
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#App">App</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Thu Jan 16 2025 18:11:43 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

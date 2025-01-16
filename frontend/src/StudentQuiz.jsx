@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import StudentScorePage from './StudentScorePage';
 import PropTypes from 'prop-types';
 import Loading from "./Loading";
+
 /**
 * StudentQuiz component renders a practicing page and lets the user practice word pairs from a given array.
 * Used by StudentPlayAllWords and StudentPlayFilteredWords components.
@@ -11,6 +12,7 @@ import Loading from "./Loading";
 * @returns A JSX element representing the practicing page.
 */
 export default function StudentQuiz({ wordlist }) {
+
     //State to store the word pair array from props
     const [wordpairs, setWordpairs] = useState([wordlist]);
     //State to store a randomly picked word pair
@@ -62,7 +64,7 @@ export default function StudentQuiz({ wordlist }) {
     * getRandomPair function picks a new random wordpair from an array
     * ensuring each go-through's uniqueness.
     *
-    * @param {array} array - Array of word pairs to pick a pair from.
+    * @param {Array} array - Array of word pairs to pick a pair from.
     */
     function getRandomPair(array) {
         //Exit earlt if given array is empty

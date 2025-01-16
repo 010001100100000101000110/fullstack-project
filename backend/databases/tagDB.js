@@ -2,6 +2,7 @@ const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database(':memory:');
 
 const tagDBFunctions = {
+
     /**
      * Initializes the tag database by creating the 'Tags' table if it doesn't exist
      * and inserts default tags if the table is empty.
@@ -29,6 +30,7 @@ const tagDBFunctions = {
                     }
                 });
             });
+
             // Insert default tags if the table is empty
             if (rowCount === 0) {
                 await this.insert("color");
@@ -43,6 +45,7 @@ const tagDBFunctions = {
             console.error("Error initializing tag database: ", err);
         }
     },
+
     /**
      * Inserts a new tag into the 'Tags' table.
      * @param {string} tagName - The name of the tag to insert.
@@ -69,6 +72,7 @@ const tagDBFunctions = {
             throw new Error("Unable to insert tag into database");
         }
     },
+
     /**
     * Finds a tag by its ID from the 'Tags' table.
     * @param {(string|number)} id - The ID of the tag to find.
@@ -93,6 +97,7 @@ const tagDBFunctions = {
         }
 
     },
+
     /**
      * Updates a tag by its ID with a new name.
      * @param {(string|number)} id - The ID of the tag to update.
@@ -118,15 +123,15 @@ const tagDBFunctions = {
             throw new Error(`Unable to update tag by id ${id}`);
         }
     },
+
     /**
-     * Retrieves all tags from the `Tags` table.
+     * Retrieves all tags from the 'Tags' table.
      * @returns {Promise<Array>} Resolves with an array of all tag objects in the database.
      */
     async findAll() {
         console.info(`Getting all tags...`);
         try {
             return new Promise(async (resolve, reject) => {
-                // Query data
                 db.all('SELECT * FROM Tags', [], (err, rows) => {
                     if (err) {
                         reject(err);
@@ -142,7 +147,7 @@ const tagDBFunctions = {
     },
 
     /**
-     * Deletes a tag from the `Tags` table by its ID.
+     * Deletes a tag from the 'Tags' table by its ID.
      * @param {(string|number)} id - The ID of the tag to delete.
      * @returns {Promise<void>} Resolves when the tag is deleted.
      */

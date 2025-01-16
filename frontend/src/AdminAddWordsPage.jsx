@@ -1,5 +1,6 @@
 import { useState } from "react";
 import AdminWordPairPage from "./AdminWordPairPage";
+
 /**
  * AdminAddWordsPage component renders a page to add a new word pair.
  * It displays a "Word pair saved!" message when a word pair is saved.
@@ -7,6 +8,7 @@ import AdminWordPairPage from "./AdminWordPairPage";
  * @returns A JSX element representing the page that either shows the AdminWordPairPage component to add a word pair or a success message after saving the word pair.
  */
 export default function AdminAddWordsPage() {
+
     // State to track if a word pair has been saved.
     const [saved, setSaved] = useState(false);
 

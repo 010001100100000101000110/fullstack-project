@@ -3,6 +3,7 @@ import axios from "axios";
 import PropTypes from 'prop-types';
 import Loading from "./Loading";
 import "./css/AdminWordPairPage.css"
+
 /**
  * AdminWordPairPage component allows the admin to add or edit a word pair.
  * It provides a component to input the word pair's translations and buttons to save or delete the word pair.
@@ -95,7 +96,7 @@ export default function AdminWordPairPage({ id, existingWordPair, onSave, onDele
      * handleCheckboxChange handles the selection and deselection of tags.
      * Stores the selected tags in 'setSelectedTags'-state array.
      *
-     * @param {number|string} tagId - ID of the tag which's checkbox is being toggled
+     * @param {(number|string)} tagId - ID of the tag which's checkbox is being toggled
      */
     const handleCheckboxChange = (tagId) => {
         setSelectedTags((prevSelected) =>

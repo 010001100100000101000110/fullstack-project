@@ -10,6 +10,7 @@ import { useLocation } from 'react-router-dom';
  * @returns JSX element representing the back button.
  */
 export default function BackButton() {
+
     const location = useLocation();
     const disableButton =
         location.pathname === '/'
