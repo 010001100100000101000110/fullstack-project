@@ -1,5 +1,5 @@
 {
-    "name": "assignment05",
+    "name": "fullstack-project",
     "private": true,
     "workspaces": [
         "frontend",

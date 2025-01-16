@@ -130,7 +130,5 @@ out
 .yarn/install-state.gz
 .pnp.*
 
-# Config
-assignment01/07/database/config.js
-assignment03/database/.env
-assignment04/.env
+# tests
+./backend/test.http
