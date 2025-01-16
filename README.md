@@ -1,4 +1,4 @@
-# Fullstack project (WIP)
+# Fullstack project  
 
 ## Introduction
 This is a course project for school. The topic given was a foreign language word practicing application for kids with the function to manage and practice words in different languages.
