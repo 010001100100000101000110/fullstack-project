@@ -75,6 +75,7 @@ export default function AdminTagPage({ id, existingTagName, onSave, onDelete }) 
             <input
                 className="tag-name-input"
                 type="text"
+                maxLength="15"
                 placeholder="Tag name"
                 value={tagName}
                 onChange={(e) => setTagName(e.target.value)}

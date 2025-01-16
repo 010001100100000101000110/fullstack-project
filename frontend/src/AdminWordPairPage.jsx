@@ -130,18 +130,21 @@ export default function AdminWordPairPage({ id, existingWordPair, onSave, onDele
             <div className="inputs">
                 <input
                     type="text"
+                    maxLength="25"
                     placeholder="English"
                     value={englishWord}
                     onChange={(e) => setEnglishWord(e.target.value)}
                 />
                 <input
                     type="text"
+                    maxLength="25"
                     placeholder="Finnish"
                     value={finnishWord}
                     onChange={(e) => setFinnishWord(e.target.value)}
                 />
                 <input
                     type="text"
+                    maxLength="25"
                     placeholder="Swedish"
                     value={swedishWord}
                     onChange={(e) => setSwedishWord(e.target.value)}
