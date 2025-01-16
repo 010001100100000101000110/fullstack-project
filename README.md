@@ -15,13 +15,18 @@ The student has two practice modes to choose from: either practice all words, or
 The student can choose which two of the three languages they want to practice, and choose the language they want to practice writing.  
 
 ## Screenshots:
+This is the general look of the whole site. The current page here is the admin user's main page.
 <img src="/screenshots/AdminFrontPage.PNG" width="700" />
+Admin's page for adding words.  
 <img src="/screenshots/AdminAddWordsPage.PNG" width="700" />
+Student's quiz page.  
 <img src="/screenshots/StudentQuiz.PNG" width="700" />
+Student's score page.  
 <img src="/screenshots/StudentScorePage.PNG" width="700" />  
 
 ## Cloud
-The project is partly on the cloud, but due to some content security policy and blocked cross origin requests, it can't work correctly.  
+The project is partly on the cloud, but due to some 'content security policy' and 'blocked cross origin requests', it doesn't function properly.  
+The author left no time to solve said problem  
 https://docker-project-wjpz.onrender.com/
 
 ## Screencast
