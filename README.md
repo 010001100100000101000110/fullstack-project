@@ -15,7 +15,7 @@ The student has two practice modes to choose from: either practice all words, or
 The student can choose which two of the three languages they want to practice, and choose the language they want to practice writing.  
 
 ## Screenshots:
-<img src="/screenshots/AdminFrontPage.PNG" width="200" />
+<img src="/screenshots/AdminFrontPage.PNG" width="400" />
 
 
 ## Cloud
