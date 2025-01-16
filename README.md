@@ -15,7 +15,8 @@ The student has two practice modes to choose from: either practice all words, or
 The student can choose which two of the three languages they want to practice, and choose the language they want to practice writing.
 
 ##Database
-The word pair database holds word pair objects in the format of {english: }
+The word pair database holds word pair objects in the format of {english: "apple", finnish: "omena", swedish: "äppel", tags: "4,5"}
+
 
 ##Screenshots:
 Screenshots from application here
