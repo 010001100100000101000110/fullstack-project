@@ -30,7 +30,8 @@ The author left no time to solve said problem
 https://docker-project-wjpz.onrender.com/
 
 ## Screencast
-Link to video here
+Link to the screencast video here  
+https://youtu.be/lQhXQu-K_m0
 
 ## How to use
 1. Clone the repository.
