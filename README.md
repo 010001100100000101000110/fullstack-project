@@ -15,10 +15,8 @@ The student has two practice modes to choose from: either practice all words, or
 The student can choose which two of the three languages they want to practice, and choose the language they want to practice writing.  
 
 ## Screenshots:
-![Alt text](/screenshots/AdminFrontPage.PNG?raw=true "Admin front page")  
-![Alt text](/screenshots/AdminAddWordsPage.PNG?raw=true "Word pair adding page")  
-![Alt text](/screenshots/StudentQuiz.PNG?raw=true "Practicing page")  
-![Alt text](/screenshots/StudentScorePage.PNG?raw=true "Score page")  
+<img src="/screenshots/AdminFrontPage.PNG" width="30" />
+
 
 ## Cloud
 The project is partly on the cloud, but due to some content security policy and blocked cross origin requests, it can't work correctly.  
