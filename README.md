@@ -15,8 +15,10 @@ The student has two practice modes to choose from: either practice all words, or
 The student can choose which two of the three languages they want to practice, and choose the language they want to practice writing.  
 
 ## Screenshots:
-<img src="/screenshots/AdminFrontPage.PNG" width="400" />
-
+<img src="/screenshots/AdminFrontPage.PNG" width="700" />
+<img src="/screenshots/AdminAddWordsPage.PNG" width="700" />
+<img src="/screenshots/StudentQuiz.PNG" width="700" />
+<img src="/screenshots/StudentScorePage.PNG" width="700" />  
 
 ## Cloud
 The project is partly on the cloud, but due to some content security policy and blocked cross origin requests, it can't work correctly.  
