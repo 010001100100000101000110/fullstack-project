@@ -16,11 +16,11 @@ The student can choose which two of the three languages they want to practice, a
 
 ## Screenshots:
 This is the general look of the whole site. The current page here is the admin user's main page.
-<img src="/screenshots/AdminFrontPage.PNG" width="700" />
+<img src="/screenshots/AdminFrontPage.PNG" width="700" />  
 Admin's page for adding words.  
-<img src="/screenshots/AdminAddWordsPage.PNG" width="700" />
+<img src="/screenshots/AdminAddWordsPage.PNG" width="700" />  
 Student's quiz page.  
-<img src="/screenshots/StudentQuiz.PNG" width="700" />
+<img src="/screenshots/StudentQuiz.PNG" width="700" />  
 Student's score page.  
 <img src="/screenshots/StudentScorePage.PNG" width="700" />  
 
@@ -33,7 +33,6 @@ https://docker-project-wjpz.onrender.com/
 Link to video here
 
 ## How to use
-
 1. Clone the repository.
 2. In a command line navigate to the root of the repository and give the command "npm start".
 3. You can then open your localhost port on your browser (should be http://localhost:5173/). 
