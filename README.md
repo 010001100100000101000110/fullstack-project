@@ -1,18 +1,18 @@
 # Fullstack project (WIP)
 
 ## Introduction
-This is a course project for school. The topic given was a foreign language word practicing application for kids.
+This is a course project for school. The topic given was a foreign language word practicing application for kids.  
 
 ## Features
-The application has two user roles, admin and student.
-There are three languages supported, English, Finnish and Swedish.
+The application has two user roles, admin and student.  
+There are three languages supported, English, Finnish and Swedish.  
 
-The admin can manage word pairs and tags by adding, editing and removing them. Wordpair can be e.g: Eng: "cat", Fin: "kissa", Swe: "katt", and a tag: "Animal"
-The student can practice the word pairs the admin created.
+The admin can manage word pairs and tags by adding, editing and removing them. Wordpair can be e.g: Eng: "cat", Fin: "kissa", Swe: "katt", and a tag: "Animal"  
+The student can practice the word pairs the admin created.  
 
-The admin has the ability to determine tags for the word pairs (e.g., Eng: dog, Fin: koira, Swe: hund, Tags: animal).
-The student has two practice modes to choose from: either practice all words, or choose a tag and practice the filtered words.
-The student can choose which two of the three languages they want to practice, and choose the language they want to practice writing.
+The admin has the ability to determine tags for the word pairs (e.g., Eng: dog, Fin: koira, Swe: hund, Tags: animal).  
+The student has two practice modes to choose from: either practice all words, or choose a tag and practice the filtered words.  
+The student can choose which two of the three languages they want to practice, and choose the language they want to practice writing.  
 
 ## Screenshots:
 Screenshots from application here
@@ -31,11 +31,9 @@ Link to video here
 3. You can then open your localhost port on your browser (should be http://localhost:5173/).
 
 ## Database
-The word pair database holds word pair objects in the format of {id: 1, english: "apple", finnish: "omena", swedish: "äppel", tags: "4,5"}.
-The 'tags' is a string containing comma separated tag IDs.
-
-The tag database holds tag objects in the format of {id: 4, name: "Food"}.
-
-The IDs for both databases are auto incremented.
+The word pair database holds word pair objects in the format of {id: 1, english: "apple", finnish: "omena", swedish: "äppel", tags: "4,5"}.  
+The 'tags' is a string containing comma separated tag IDs.  
+The tag database holds tag objects in the format of {id: 4, name: "Food"}.  
+The IDs for both databases are auto incremented.  
 
 Vee Jalonen
