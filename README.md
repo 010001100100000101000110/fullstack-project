@@ -7,7 +7,8 @@ This is a course project for school. The topic given was a foreign language word
 The application has two user roles, admin and student.  
 There are three languages supported, English, Finnish and Swedish.  
 
-The admin can manage word pairs and tags by adding, editing and removing them. Wordpair can be e.g: Eng: "cat", Fin: "kissa", Swe: "katt", and a tag: "Animal"  
+The admin can manage word pairs and tags by adding, editing and removing them.  
+Wordpair can be e.g: Eng: "cat", Fin: "kissa", Swe: "katt", and a tag: "Animal".  
 The student can practice the word pairs the admin created.  
 
 The admin has the ability to determine tags for the word pairs (e.g., Eng: dog, Fin: koira, Swe: hund, Tags: animal).  
@@ -26,7 +27,7 @@ Student's score page.
 
 ## Cloud
 The project is partly on the cloud, but due to some 'content security policy' and 'blocked cross origin requests', it doesn't function properly.  
-The author left no time to solve said problem  
+The project lead left no time to solve any sudden problems...  
 https://docker-project-wjpz.onrender.com/
 
 ## Screencast
